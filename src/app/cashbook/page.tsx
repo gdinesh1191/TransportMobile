@@ -14,18 +14,14 @@ const cashbookData: CashbookEntry[] = [
     { id: "3", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
     { id: "4", date: "08-02-2025", credit: 0.0, debit: 350.0 },
     { id: "5", date: "08-02-2025", credit: 7500.0, debit: 0.0 },
-  
     { id: "6", date: "08-01-2025", credit: 0.0, debit: 2500.0 },
     { id: "7", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
     { id: "8", date: "08-02-2025", credit: 0.0, debit: 350.0 },
     { id: "9", date: "08-02-2025", credit: 7500.0, debit: 0.0 },
-  
     { id: "10", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
     { id: "11", date: "08-02-2025", credit: 0.0, debit: 350.0 },
-  
-    { id: "12", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
+   { id: "12", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
     { id: "13", date: "08-02-2025", credit: 0.0, debit: 350.0 },
-  
     { id: "14", date: "08-01-2025", credit: 0.0, debit: 2500.0 },
     { id: "15", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
     { id: "16", date: "08-02-2025", credit: 7500.0, debit: 0.0 },
