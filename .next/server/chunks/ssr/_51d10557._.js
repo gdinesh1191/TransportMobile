@@ -15,7 +15,76 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 ;
 ;
-// Define the available categories
+const postData = (payload)=>{
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            console.log("Mock API call with payload:", payload);
+            resolve({
+                status: "success",
+                data: payload.data
+            });
+        }, 1000);
+    });
+};
+const mockFetchExpenseData = (id)=>{
+    const mockExpenses = {
+        "1": {
+            id: "1",
+            tripSheetId: "TS-123",
+            expenseCategory: "Fuel Charges",
+            expenseDate: "21/08/2025",
+            amount: "1500",
+            paymentMethod: "UPI",
+            remarks: "Fueling up for the trip.",
+            fileAttachments: "fuel_receipt.jpg"
+        }
+    };
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            const data = mockExpenses[id];
+            if (data) {
+                resolve({
+                    status: "success",
+                    data
+                });
+            } else {
+                reject({
+                    status: "error",
+                    message: "Expense not found"
+                });
+            }
+        }, 500);
+    });
+};
+// Toast message component for feedback
+const ToastMessage = ({ message, type, onClose })=>{
+    const color = type === "success" ? "bg-green-500" : "bg-red-500";
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: `fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg text-white shadow-md z-50 transition-opacity duration-300 ${color}`,
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+            children: message
+        }, void 0, false, {
+            fileName: "[project]/src/app/expense/new/page.tsx",
+            lineNumber: 59,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "[project]/src/app/expense/new/page.tsx",
+        lineNumber: 58,
+        columnNumber: 5
+    }, this);
+};
+// Form errors component
+const FormError = ({ message })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "form-error text-red-500 text-sm mt-1",
+        children: message
+    }, void 0, false, {
+        fileName: "[project]/src/app/expense/new/page.tsx",
+        lineNumber: 66,
+        columnNumber: 10
+    }, this);
+};
 const expenseCategories = [
     "Fuel Charges",
     "Toll Charges",
@@ -26,56 +95,96 @@ const expenseCategories = [
     "Vehicle Service on Trip",
     "Other Miscellaneous"
 ];
-// Define colors for payment types (matching your CSS classes)
-const typeColors = {
-    cash: "bg-green-100",
-    upi: "bg-purple-100",
-    netbanking: "bg-yellow-100"
+const paymentTypeColors = {
+    Cash: "bg-green-100",
+    UPI: "bg-purple-100",
+    "Net Banking": "bg-yellow-100"
 };
 function CreateTripExpense() {
-    // State for form fields
+    // We'll use a local state variable to simulate the editId from the URL
+    const [editId, setEditId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const formRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         date: "",
         category: "",
         description: "",
         amount: "",
-        paymentType: "cash",
+        paymentType: "Cash",
         attachment: ""
     });
-    // State for form validation errors
+    const [formKey, setFormKey] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});
-    // State for category off-canvas visibility
     const [isCategoryOffcanvasOpen, setIsCategoryOffcanvasOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [categorySearchQuery, setCategorySearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    // Refs for input elements to programmatically show errors or focus
-    const dateInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const categoryInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const amountInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const paymentTypeSectionRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const attachmentInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null); // For the hidden input
-    // Set initial date on component mount
+    const [toastMessage, setToastMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [toastType, setToastType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("success");
+    // Fetch data for editing when the component loads or the ID changes
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const today = new Date();
-        const formattedDate = today.toLocaleDateString('en-GB');
-        setFormData((prev)=>({
-                ...prev,
-                date: formattedDate
-            }));
-    }, []);
-    // Handle input changes
+        if (editId) {
+            // @ts-ignore
+            mockFetchExpenseData(editId).then((response)=>{
+                if (response.status === "success") {
+                    const data = response.data;
+                    setFormData({
+                        date: data.expenseDate || "",
+                        category: data.expenseCategory || "",
+                        description: data.remarks || "",
+                        amount: data.amount || "",
+                        paymentType: data.paymentMethod || "Cash",
+                        attachment: data.fileAttachments || ""
+                    });
+                } else {
+                    setToastMessage("Failed to load expense data.");
+                    setToastType("error");
+                    resetForm();
+                }
+            }).catch((err)=>{
+                setToastMessage("Something went wrong while fetching data.");
+                setToastType("error");
+                resetForm();
+            });
+        } else {
+            resetForm();
+        }
+    }, [
+        editId
+    ]);
+    // Set today's date on initial load or form reset
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (!editId) {
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-GB');
+            setFormData((prev)=>({
+                    ...prev,
+                    date: formattedDate
+                }));
+        }
+    }, [
+        formKey,
+        editId
+    ]);
+    // Auto-hide toast message
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (toastMessage) {
+            const timer = setTimeout(()=>{
+                setToastMessage(null);
+            }, 3000);
+            return ()=>clearTimeout(timer);
+        }
+    }, [
+        toastMessage
+    ]);
     const handleChange = (e)=>{
         const { name, value } = e.target;
         setFormData((prev)=>({
                 ...prev,
                 [name]: value
             }));
-        // Clear error for the field if user starts typing
         setErrors((prev)=>({
                 ...prev,
                 [name]: null
             }));
     };
-    // Handle payment type selection
     const handlePaymentTypeClick = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((type)=>{
         setFormData((prev)=>({
                 ...prev,
@@ -84,9 +193,8 @@ function CreateTripExpense() {
         setErrors((prev)=>({
                 ...prev,
                 paymentType: null
-            })); // Clear error
+            }));
     }, []);
-    // Handle attachment buttons (Camera / Upload File)
     const handleAttachment = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((fileName)=>{
         setFormData((prev)=>({
                 ...prev,
@@ -95,21 +203,18 @@ function CreateTripExpense() {
         setErrors((prev)=>({
                 ...prev,
                 attachment: null
-            })); // Clear error
+            }));
     }, []);
-    // Handle back button click
     const handleBackButtonClick = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
-        window.history.back();
+        setEditId(null);
     }, []);
-    // Handle category off-canvas open/close
     const openCategoryOffcanvas = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
         setIsCategoryOffcanvasOpen(true);
     }, []);
     const closeCategoryOffcanvas = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
         setIsCategoryOffcanvasOpen(false);
-        setCategorySearchQuery(""); // Clear search when closing
+        setCategorySearchQuery("");
     }, []);
-    // Handle selecting a category from the off-canvas
     const handleCategorySelect = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((category)=>{
         setFormData((prev)=>({
                 ...prev,
@@ -118,626 +223,295 @@ function CreateTripExpense() {
         setErrors((prev)=>({
                 ...prev,
                 category: null
-            })); // Clear error
+            }));
         closeCategoryOffcanvas();
     }, [
         closeCategoryOffcanvas
     ]);
-    // Handle form submission and validation
-    const handleCreateTripExpense = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
+    const resetForm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
+        setFormData({
+            date: "",
+            category: "",
+            description: "",
+            amount: "",
+            paymentType: "Cash",
+            attachment: ""
+        });
+        setErrors({});
+        setCategorySearchQuery("");
+        setFormKey((prevKey)=>prevKey + 1);
+    }, []);
+    const handleCreateTripExpense = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(async ()=>{
         let newErrors = {};
         let isValid = true;
-        // Date validation
+        // Validation logic
         if (!formData.date) {
             newErrors.date = "Date is required";
             isValid = false;
         }
-        // Category validation
         if (!formData.category) {
             newErrors.category = "Category is required";
             isValid = false;
         }
-        // Amount validation
         const amountNum = parseFloat(formData.amount);
         if (!formData.amount || isNaN(amountNum) || amountNum <= 0) {
             newErrors.amount = "Amount is required and must be a positive number";
             isValid = false;
         }
-        // Payment Type validation
         if (!formData.paymentType) {
             newErrors.paymentType = "Please select a payment type";
             isValid = false;
         }
-        // Attachment validation
         if (!formData.attachment) {
             newErrors.attachment = "Attachment is required";
             isValid = false;
         }
         setErrors(newErrors);
         if (isValid) {
-            console.log("Form Data:", formData);
-            alert("Form is valid. Check console for data.");
-        // In a real app, you'd send formData to your backend here
+            // Simulate API call using the mock postData function
+            const payload = {
+                token: "keepTripExpense",
+                data: {
+                    id: editId || null,
+                    tripSheetId: "TRIP-001",
+                    expenseCategory: formData.category,
+                    expenseDate: formData.date,
+                    amount: formData.amount,
+                    paymentMethod: formData.paymentType,
+                    remarks: formData.description,
+                    fileAttachments: formData.attachment
+                }
+            };
+            try {
+                const response = await postData(payload);
+                if (response.status === "success") {
+                    setToastMessage("Expense saved successfully!");
+                    setToastType("success");
+                    if (!editId) {
+                        resetForm();
+                    }
+                }
+            } catch (error) {
+                setToastMessage("Error saving expense. Please try again.");
+                setToastType("error");
+            }
+        } else {
+            setToastMessage("Please correct the form errors.");
+            setToastType("error");
         }
     }, [
-        formData
+        formData,
+        editId,
+        resetForm
     ]);
-    // Filter categories based on search query
     const filteredCategories = expenseCategories.filter((cat)=>cat.toLowerCase().includes(categorySearchQuery.toLowerCase()));
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-                className: "jsx-89d7e3509e2cceba" + " " + "fixed top-0 left-0 right-0 w-full z-20 flex items-center justify-between px-4 h-14 bg-white border-b border-gray-200 shadow-sm",
+                className: "jsx-245cdba50398c747" + " " + "fixed top-0 left-0 right-0 w-full z-20 flex items-center justify-between px-4 h-14 bg-white border-b border-gray-200 shadow-sm",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "jsx-89d7e3509e2cceba" + " " + "flex items-center gap-2",
+                    className: "jsx-245cdba50398c747" + " " + "flex items-center gap-2",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             id: "back-btn",
                             onClick: handleBackButtonClick,
-                            className: "jsx-89d7e3509e2cceba" + " " + "text-gray-800 text-2xl mr-1",
+                            className: "jsx-245cdba50398c747" + " " + "text-gray-800 text-2xl mr-1",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                className: "jsx-89d7e3509e2cceba" + " " + "ri-arrow-left-line"
+                                className: "jsx-245cdba50398c747" + " " + "ri-arrow-left-line"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/expense/new/page.tsx",
-                                lineNumber: 167,
+                                lineNumber: 278,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/expense/new/page.tsx",
-                            lineNumber: 166,
+                            lineNumber: 277,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "jsx-89d7e3509e2cceba" + " " + "font-semibold text-gray-800 text-lg",
-                            children: "Create Trip Expense"
+                            className: "jsx-245cdba50398c747" + " " + "font-semibold text-gray-800 text-lg",
+                            children: editId ? 'Edit Trip Expense' : 'Create Trip Expense'
                         }, void 0, false, {
                             fileName: "[project]/src/app/expense/new/page.tsx",
-                            lineNumber: 169,
+                            lineNumber: 280,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/expense/new/page.tsx",
-                    lineNumber: 165,
+                    lineNumber: 276,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/expense/new/page.tsx",
-                lineNumber: 164,
+                lineNumber: 275,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-                className: "jsx-89d7e3509e2cceba" + " " + "min-h-screen flex flex-col pt-16 pb-20",
+                className: "jsx-245cdba50398c747" + " " + "min-h-screen flex flex-col pt-16 pb-20 bg-gray-50",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     id: "add-expense-form",
                     onSubmit: (e)=>e.preventDefault(),
-                    className: "jsx-89d7e3509e2cceba",
-                    children: [
-                        " ",
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "jsx-89d7e3509e2cceba" + " " + "mx-4 my-2 flex flex-col",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-89d7e3509e2cceba" + " " + "mb-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "block text-sm font-medium text-gray-700 mb-1",
-                                            children: [
-                                                "Date",
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "text-red-500",
-                                                    children: "*"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 177,
-                                                    columnNumber: 83
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 177,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "relative cursor-pointer",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "text",
-                                                    name: "date",
-                                                    value: formData.date,
-                                                    readOnly: true,
-                                                    ref: dateInputRef,
-                                                    className: "jsx-89d7e3509e2cceba" + " " + `form-control pr-10 w-full expense ${errors.date ? 'border-red-500' : ''}`
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 179,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "absolute inset-y-0 right-4 flex items-center pointer-events-none",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                        className: "jsx-89d7e3509e2cceba" + " " + "ri-calendar-event-line text-gray-800 text-lg"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/expense/new/page.tsx",
-                                                        lineNumber: 188,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 187,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 178,
-                                            columnNumber: 15
-                                        }, this),
-                                        errors.date && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "form-error text-red-500 text-sm mt-1",
-                                            children: errors.date
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 191,
-                                            columnNumber: 31
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                    lineNumber: 176,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-89d7e3509e2cceba" + " " + "mb-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "block text-sm font-medium text-gray-700 mb-1",
-                                            children: [
-                                                "Category",
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "text-red-500",
-                                                    children: "*"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 195,
-                                                    columnNumber: 87
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 195,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            onClick: openCategoryOffcanvas,
-                                            className: "jsx-89d7e3509e2cceba" + " " + "relative cursor-pointer",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "text",
-                                                    name: "category",
-                                                    placeholder: "Select Category",
-                                                    value: formData.category,
-                                                    readOnly: true,
-                                                    ref: categoryInputRef,
-                                                    className: "jsx-89d7e3509e2cceba" + " " + `form-control pr-10 w-full expense ${errors.category ? 'border-red-500' : ''}`
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 197,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "absolute inset-y-0 right-2 flex items-center pointer-events-none",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                        className: "jsx-89d7e3509e2cceba" + " " + "ri-arrow-down-s-fill text-gray-800 text-lg"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/expense/new/page.tsx",
-                                                        lineNumber: 207,
-                                                        columnNumber: 19
-                                                    }, this)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 206,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 196,
-                                            columnNumber: 15
-                                        }, this),
-                                        errors.category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "form-error text-red-500 text-sm mt-1",
-                                            children: errors.category
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 210,
-                                            columnNumber: 35
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                    lineNumber: 194,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-89d7e3509e2cceba" + " " + "mb-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "block text-sm font-medium text-gray-700 mb-1",
-                                            children: "Description"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 214,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                            name: "description",
-                                            placeholder: "Enter Description",
-                                            value: formData.description,
-                                            onChange: handleChange,
-                                            className: "jsx-89d7e3509e2cceba" + " " + "form-control h-24"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 215,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                    lineNumber: 213,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-89d7e3509e2cceba" + " " + "mb-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "block text-sm font-medium text-gray-700 mb-1",
-                                            children: [
-                                                "Amount",
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "text-red-500",
-                                                    children: "*"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 225,
-                                                    columnNumber: 85
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 225,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "text",
-                                            name: "amount",
-                                            placeholder: "Enter Amount",
-                                            value: formData.amount,
-                                            onChange: handleChange,
-                                            required: true,
-                                            ref: amountInputRef,
-                                            className: "jsx-89d7e3509e2cceba" + " " + `form-control expense ${errors.amount ? 'border-red-500' : ''} numbers-decimal`
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 226,
-                                            columnNumber: 15
-                                        }, this),
-                                        errors.amount && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "form-error text-red-500 text-sm mt-1",
-                                            children: errors.amount
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 236,
-                                            columnNumber: 33
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                    lineNumber: 224,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    id: "paymentSections",
-                                    className: "jsx-89d7e3509e2cceba",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "flex items-center font-semibold text-gray-800 mb-2",
-                                            children: [
-                                                "Select Type",
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "text-red-500",
-                                                    children: "*"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 241,
-                                                    columnNumber: 28
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 240,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            ref: paymentTypeSectionRef,
-                                            className: "jsx-89d7e3509e2cceba" + " " + "flex flex-wrap items-center gap-2",
-                                            children: [
-                                                'cash',
-                                                'upi',
-                                                'netbanking'
-                                            ].map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    onClick: ()=>handlePaymentTypeClick(type),
-                                                    "data-type": type,
-                                                    className: "jsx-89d7e3509e2cceba" + " " + `payment-type rounded-full py-1 px-3 font-medium font-semibold cursor-pointer ${formData.paymentType === type ? typeColors[type] : 'bg-gray-100'}`,
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                            className: "jsx-89d7e3509e2cceba" + " " + `ri-checkbox-circle-fill mr-1 ${formData.paymentType !== type ? 'hidden' : ''}`
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                                            lineNumber: 253,
-                                                            columnNumber: 21
-                                                        }, this),
-                                                        type.charAt(0).toUpperCase() + type.slice(1),
-                                                        " "
-                                                    ]
-                                                }, type, true, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 245,
-                                                    columnNumber: 19
-                                                }, this))
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 243,
-                                            columnNumber: 15
-                                        }, this),
-                                        errors.paymentType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "form-error text-red-500 text-sm mt-1",
-                                            children: errors.paymentType
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 258,
-                                            columnNumber: 38
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                    lineNumber: 239,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-89d7e3509e2cceba" + " " + "mb-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "flex items-center font-semibold text-gray-800 mb-2",
-                                            children: [
-                                                "Attachments",
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "text-red-500",
-                                                    children: "*"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 263,
-                                                    columnNumber: 28
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 262,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "flex flex-col w-full gap-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                    type: "hidden",
-                                                    name: "attachment",
-                                                    id: "attachmentInput",
-                                                    value: formData.attachment,
-                                                    ref: attachmentInputRef,
-                                                    className: "jsx-89d7e3509e2cceba"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 267,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + `text-sm text-green-600 ${formData.attachment ? '' : 'hidden'}`,
-                                                    children: [
-                                                        "Attached: ",
-                                                        formData.attachment
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 270,
-                                                    columnNumber: 17
-                                                }, this),
-                                                errors.attachment && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "form-error text-red-500 text-sm mt-1",
-                                                    children: errors.attachment
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 273,
-                                                    columnNumber: 39
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "flex gap-2",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: ()=>handleAttachment("receipt_from_camera.jpg"),
-                                                            className: "jsx-89d7e3509e2cceba" + " " + "camera-file flex items-center justify-center gap-2 font-semibold border border-gray-300 rounded-md bg-white text-green-600 px-4 py-2 text-sm w-full",
-                                                            children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                                    className: "jsx-89d7e3509e2cceba" + " " + "ri-camera-line text-lg"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                                    lineNumber: 281,
-                                                                    columnNumber: 21
-                                                                }, this),
-                                                                " Camera"
-                                                            ]
-                                                        }, void 0, true, {
-                                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                                            lineNumber: 277,
-                                                            columnNumber: 19
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            type: "button",
-                                                            onClick: ()=>handleAttachment("uploaded_file.pdf"),
-                                                            className: "jsx-89d7e3509e2cceba" + " " + "upload-file flex items-center justify-center gap-2 font-semibold border border-gray-300 rounded-md bg-white text-green-600 px-4 py-2 text-sm w-full",
-                                                            children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                                    className: "jsx-89d7e3509e2cceba" + " " + "ri-upload-2-line text-lg"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                                    lineNumber: 287,
-                                                                    columnNumber: 21
-                                                                }, this),
-                                                                " Upload File"
-                                                            ]
-                                                        }, void 0, true, {
-                                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                                            lineNumber: 283,
-                                                            columnNumber: 19
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 276,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 265,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                    lineNumber: 261,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/expense/new/page.tsx",
-                            lineNumber: 175,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/app/expense/new/page.tsx",
-                    lineNumber: 174,
-                    columnNumber: 9
-                }, this)
-            }, void 0, false, {
-                fileName: "[project]/src/app/expense/new/page.tsx",
-                lineNumber: 173,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-89d7e3509e2cceba" + " " + "fixed bottom-0 left-0 right-0 z-10",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-89d7e3509e2cceba" + " " + "py-2 px-5 bg-gray-200 rounded-t-3xl border-b border-gray-300"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/expense/new/page.tsx",
-                        lineNumber: 298,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-89d7e3509e2cceba" + " " + "bg-white flex justify-end items-center px-5 h-16",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            id: "createBtn",
-                            type: "button",
-                            onClick: handleCreateTripExpense,
-                            className: "jsx-89d7e3509e2cceba" + " " + "bg-green-600 text-white font-semibold py-2 px-4 rounded-lg text-lg flex items-center gap-2",
-                            children: [
-                                "Create ",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                    className: "jsx-89d7e3509e2cceba" + " " + "ri-arrow-right-s-line text-lg"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                    lineNumber: 303,
-                                    columnNumber: 20
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/expense/new/page.tsx",
-                            lineNumber: 300,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/expense/new/page.tsx",
-                        lineNumber: 299,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/app/expense/new/page.tsx",
-                lineNumber: 297,
-                columnNumber: 7
-            }, this),
-            isCategoryOffcanvasOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        onClick: closeCategoryOffcanvas,
-                        className: "jsx-89d7e3509e2cceba" + " " + "fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-50 z-30 transition-opacity duration-300"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/expense/new/page.tsx",
-                        lineNumber: 311,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        id: "categoryOffcanvas",
-                        className: "jsx-89d7e3509e2cceba" + " " + "fixed bottom-0 left-0 right-0 bg-white custom-rounded-t z-40 shadow-lg flex flex-col transform translate-y-0 transition-transform duration-200",
+                    className: "jsx-245cdba50398c747",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "jsx-245cdba50398c747" + " " + "mx-4 my-4 flex flex-col gap-4",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-89d7e3509e2cceba" + " " + "py-2 px-5 border-b-2 border-gray-200",
+                                className: "jsx-245cdba50398c747",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-89d7e3509e2cceba" + " " + "flex justify-center mb-3",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "w-16 h-1 bg-gray-400 rounded-full mt-2"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 322,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "jsx-245cdba50398c747" + " " + "block text-sm font-medium text-gray-700 mb-1",
+                                        children: [
+                                            "Date",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "jsx-245cdba50398c747" + " " + "text-red-500",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 288,
+                                                columnNumber: 83
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/src/app/expense/new/page.tsx",
-                                        lineNumber: 321,
+                                        lineNumber: 288,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-89d7e3509e2cceba" + " " + "flex justify-between items-center",
+                                        className: "jsx-245cdba50398c747" + " " + "relative cursor-pointer",
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-89d7e3509e2cceba" + " " + "text-xl font-bold text-gray-800",
-                                                children: "Select Category"
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "text",
+                                                name: "date",
+                                                value: formData.date,
+                                                onChange: handleChange,
+                                                className: "jsx-245cdba50398c747" + " " + `form-control pr-10 w-full expense ${errors.date ? 'border-red-500' : ''}`
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/expense/new/page.tsx",
-                                                lineNumber: 325,
+                                                lineNumber: 290,
                                                 columnNumber: 17
                                             }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                id: "closecategoryBtn",
-                                                onClick: closeCategoryOffcanvas,
-                                                className: "jsx-89d7e3509e2cceba" + " " + "text-gray-500",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-245cdba50398c747" + " " + "absolute inset-y-0 right-4 flex items-center pointer-events-none",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "ri-close-line text-2xl"
+                                                    className: "jsx-245cdba50398c747" + " " + "ri-calendar-event-line text-gray-800 text-lg"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 327,
+                                                    lineNumber: 298,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/expense/new/page.tsx",
-                                                lineNumber: 326,
+                                                lineNumber: 297,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 289,
+                                        columnNumber: 15
+                                    }, this),
+                                    errors.date && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(FormError, {
+                                        message: errors.date
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 301,
+                                        columnNumber: 31
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                lineNumber: 287,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-245cdba50398c747",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "jsx-245cdba50398c747" + " " + "block text-sm font-medium text-gray-700 mb-1",
+                                        children: [
+                                            "Category",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "jsx-245cdba50398c747" + " " + "text-red-500",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 305,
+                                                columnNumber: 87
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 305,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        onClick: openCategoryOffcanvas,
+                                        className: "jsx-245cdba50398c747" + " " + "relative cursor-pointer",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "text",
+                                                name: "category",
+                                                placeholder: "Select Category",
+                                                value: formData.category,
+                                                readOnly: true,
+                                                className: "jsx-245cdba50398c747" + " " + `form-control pr-10 w-full expense ${errors.category ? 'border-red-500' : ''}`
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 307,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-245cdba50398c747" + " " + "absolute inset-y-0 right-2 flex items-center pointer-events-none",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                    className: "jsx-245cdba50398c747" + " " + "ri-arrow-down-s-fill text-gray-800 text-lg"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/expense/new/page.tsx",
+                                                    lineNumber: 316,
+                                                    columnNumber: 19
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 315,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 306,
+                                        columnNumber: 15
+                                    }, this),
+                                    errors.category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(FormError, {
+                                        message: errors.category
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 319,
+                                        columnNumber: 35
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                lineNumber: 304,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-245cdba50398c747",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "jsx-245cdba50398c747" + " " + "block text-sm font-medium text-gray-700 mb-1",
+                                        children: "Description"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 323,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                                        name: "description",
+                                        placeholder: "Enter Description",
+                                        value: formData.description,
+                                        onChange: handleChange,
+                                        className: "jsx-245cdba50398c747" + " " + "form-control h-24"
+                                    }, void 0, false, {
                                         fileName: "[project]/src/app/expense/new/page.tsx",
                                         lineNumber: 324,
                                         columnNumber: 15
@@ -745,113 +519,458 @@ function CreateTripExpense() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/expense/new/page.tsx",
-                                lineNumber: 320,
+                                lineNumber: 322,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-89d7e3509e2cceba" + " " + "flex-1 p-4 max-h-[460px] min-h-[460px] flex flex-col",
+                                className: "jsx-245cdba50398c747",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                        className: "jsx-245cdba50398c747" + " " + "block text-sm font-medium text-gray-700 mb-1",
+                                        children: [
+                                            "Amount",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "jsx-245cdba50398c747" + " " + "text-red-500",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 334,
+                                                columnNumber: 85
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 334,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: "text",
+                                        name: "amount",
+                                        placeholder: "Enter Amount",
+                                        value: formData.amount,
+                                        onChange: handleChange,
+                                        className: "jsx-245cdba50398c747" + " " + `form-control expense ${errors.amount ? 'border-red-500' : ''} numbers-decimal`
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 335,
+                                        columnNumber: 15
+                                    }, this),
+                                    errors.amount && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(FormError, {
+                                        message: errors.amount
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 343,
+                                        columnNumber: 33
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                lineNumber: 333,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-245cdba50398c747",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                        className: "jsx-245cdba50398c747" + " " + "flex items-center font-semibold text-gray-800 mb-2",
+                                        children: [
+                                            "Select Type",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "jsx-245cdba50398c747" + " " + "text-red-500",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 348,
+                                                columnNumber: 28
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 347,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "jsx-245cdba50398c747" + " " + "flex flex-wrap items-center gap-2",
+                                        children: [
+                                            'Cash',
+                                            'UPI',
+                                            'Net Banking'
+                                        ].map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                onClick: ()=>handlePaymentTypeClick(type),
+                                                className: "jsx-245cdba50398c747" + " " + `payment-type rounded-full py-1 px-3 font-medium font-semibold cursor-pointer ${formData.paymentType === type ? paymentTypeColors[type] : 'bg-gray-100'} border border-gray-300 transition-all`,
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                        className: "jsx-245cdba50398c747" + " " + `ri-checkbox-circle-fill mr-1 ${formData.paymentType !== type ? 'hidden' : ''}`
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                                        lineNumber: 359,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    type
+                                                ]
+                                            }, type, true, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 352,
+                                                columnNumber: 19
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 350,
+                                        columnNumber: 15
+                                    }, this),
+                                    errors.paymentType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(FormError, {
+                                        message: errors.paymentType
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 364,
+                                        columnNumber: 38
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                lineNumber: 346,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-245cdba50398c747",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                        className: "jsx-245cdba50398c747" + " " + "flex items-center font-semibold text-gray-800 mb-2",
+                                        children: [
+                                            "Attachments",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "jsx-245cdba50398c747" + " " + "text-red-500",
+                                                children: "*"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 369,
+                                                columnNumber: 28
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 368,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "jsx-245cdba50398c747" + " " + "flex flex-col w-full gap-2",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                type: "hidden",
+                                                name: "attachment",
+                                                id: "attachmentInput",
+                                                value: formData.attachment,
+                                                className: "jsx-245cdba50398c747"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 372,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-245cdba50398c747" + " " + `text-sm text-green-600 ${formData.attachment ? 'block' : 'hidden'}`,
+                                                children: [
+                                                    "Attached: ",
+                                                    formData.attachment
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 373,
+                                                columnNumber: 17
+                                            }, this),
+                                            errors.attachment && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(FormError, {
+                                                message: errors.attachment
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 376,
+                                                columnNumber: 39
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-245cdba50398c747" + " " + "flex gap-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        type: "button",
+                                                        onClick: ()=>handleAttachment("receipt_from_camera.jpg"),
+                                                        className: "jsx-245cdba50398c747" + " " + "flex-1 camera-file flex items-center justify-center gap-2 font-semibold border border-gray-300 rounded-md bg-white text-green-600 px-4 py-2 text-sm",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                                className: "jsx-245cdba50398c747" + " " + "ri-camera-line text-lg"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                                lineNumber: 382,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            " Camera"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                                        lineNumber: 378,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        type: "button",
+                                                        onClick: ()=>handleAttachment("uploaded_file.pdf"),
+                                                        className: "jsx-245cdba50398c747" + " " + "flex-1 upload-file flex items-center justify-center gap-2 font-semibold border border-gray-300 rounded-md bg-white text-green-600 px-4 py-2 text-sm",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                                className: "jsx-245cdba50398c747" + " " + "ri-upload-2-line text-lg"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                                lineNumber: 388,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            " Upload File"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                                        lineNumber: 384,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 377,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 371,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                lineNumber: 367,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/expense/new/page.tsx",
+                        lineNumber: 286,
+                        columnNumber: 11
+                    }, this)
+                }, formKey, false, {
+                    fileName: "[project]/src/app/expense/new/page.tsx",
+                    lineNumber: 285,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/expense/new/page.tsx",
+                lineNumber: 284,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "jsx-245cdba50398c747" + " " + "fixed bottom-0 left-0 right-0 z-10 bg-white shadow-lg p-4 flex justify-between items-center",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: ()=>setEditId(editId ? null : "1"),
+                        className: "jsx-245cdba50398c747" + " " + "text-sm text-gray-500 underline",
+                        children: editId ? 'Switch to Create' : 'Switch to Edit'
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/expense/new/page.tsx",
+                        lineNumber: 400,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        id: "createBtn",
+                        type: "button",
+                        onClick: handleCreateTripExpense,
+                        className: "jsx-245cdba50398c747" + " " + "bg-green-600 text-white font-semibold py-3 px-4 rounded-lg text-lg flex items-center justify-center gap-2 hover:bg-green-700 transition",
+                        children: [
+                            editId ? 'Save' : 'Create',
+                            " ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                className: "jsx-245cdba50398c747" + " " + "ri-arrow-right-s-line text-lg"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                lineNumber: 412,
+                                columnNumber: 40
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/expense/new/page.tsx",
+                        lineNumber: 406,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/expense/new/page.tsx",
+                lineNumber: 398,
+                columnNumber: 7
+            }, this),
+            isCategoryOffcanvasOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        onClick: closeCategoryOffcanvas,
+                        className: "jsx-245cdba50398c747" + " " + "fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/expense/new/page.tsx",
+                        lineNumber: 419,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        id: "categoryOffcanvas",
+                        className: "jsx-245cdba50398c747" + " " + "fixed bottom-0 left-0 right-0 bg-white custom-rounded-t z-40 shadow-lg flex flex-col transform translate-y-0 transition-transform duration-200",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-245cdba50398c747" + " " + "py-2 px-5 border-b-2 border-gray-200",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-89d7e3509e2cceba" + " " + "mb-2 relative",
+                                        className: "jsx-245cdba50398c747" + " " + "flex justify-center mb-3",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "jsx-245cdba50398c747" + " " + "w-16 h-1 bg-gray-400 rounded-full mt-2"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/expense/new/page.tsx",
+                                            lineNumber: 429,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 428,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "jsx-245cdba50398c747" + " " + "flex justify-between items-center",
                                         children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-245cdba50398c747" + " " + "text-xl font-bold text-gray-800",
+                                                children: "Select Category"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 432,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                id: "closecategoryBtn",
+                                                onClick: closeCategoryOffcanvas,
+                                                className: "jsx-245cdba50398c747" + " " + "text-gray-500",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                    className: "jsx-245cdba50398c747" + " " + "ri-close-line text-2xl"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/expense/new/page.tsx",
+                                                    lineNumber: 434,
+                                                    columnNumber: 19
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 433,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 431,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                lineNumber: 427,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "jsx-245cdba50398c747" + " " + "flex-1 p-4 max-h-[460px] min-h-[460px] flex flex-col",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "jsx-245cdba50398c747" + " " + "mb-2 relative",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                className: "jsx-245cdba50398c747" + " " + "ri-search-line absolute inset-y-0 left-3 flex items-center text-gray-400 text-lg pointer-events-none"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/expense/new/page.tsx",
+                                                lineNumber: 440,
+                                                columnNumber: 17
+                                            }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                 type: "text",
                                                 id: "unitSearchInput",
                                                 placeholder: "Search Expense Category",
                                                 value: categorySearchQuery,
                                                 onChange: (e)=>setCategorySearchQuery(e.target.value),
-                                                className: "jsx-89d7e3509e2cceba" + " " + "form-control w-full search-input pr-4 py-2 border border-gray-300 rounded-lg"
+                                                className: "jsx-245cdba50398c747" + " " + "form-control w-full search-input pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-green-500 focus:border-green-500"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/expense/new/page.tsx",
-                                                lineNumber: 333,
+                                                lineNumber: 441,
                                                 columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-89d7e3509e2cceba" + " " + "absolute inset-y-0 left-3 flex items-center pointer-events-none",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "ri-search-line text-gray-400 text-lg"
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/expense/new/page.tsx",
+                                        lineNumber: 439,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "jsx-245cdba50398c747" + " " + "overflow-y-auto flex-1 custom-scroll",
+                                        children: filteredCategories.length > 0 ? filteredCategories.map((category)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                onClick: ()=>handleCategorySelect(category),
+                                                className: "jsx-245cdba50398c747" + " " + "p-2 flex items-center justify-between cursor-pointer hover:bg-gray-100 rounded",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    className: "jsx-245cdba50398c747",
+                                                    children: category
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 342,
-                                                    columnNumber: 19
+                                                    lineNumber: 458,
+                                                    columnNumber: 23
                                                 }, this)
-                                            }, void 0, false, {
+                                            }, category, false, {
                                                 fileName: "[project]/src/app/expense/new/page.tsx",
-                                                lineNumber: 341,
-                                                columnNumber: 17
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                                lineNumber: 453,
+                                                columnNumber: 21
+                                            }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "jsx-245cdba50398c747" + " " + "p-2 text-gray-500",
+                                            children: "No categories found."
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/expense/new/page.tsx",
+                                            lineNumber: 462,
+                                            columnNumber: 19
+                                        }, this)
+                                    }, void 0, false, {
                                         fileName: "[project]/src/app/expense/new/page.tsx",
-                                        lineNumber: 332,
+                                        lineNumber: 450,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-89d7e3509e2cceba" + " " + "overflow-y-auto flex-1 custom-scroll",
-                                        children: [
-                                            " ",
-                                            filteredCategories.length > 0 ? filteredCategories.map((category)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    onClick: ()=>handleCategorySelect(category),
-                                                    className: "jsx-89d7e3509e2cceba" + " " + "p-2 flex items-center justify-between cursor-pointer hover:bg-gray-100 rounded",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "jsx-89d7e3509e2cceba",
-                                                        children: category
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/src/app/expense/new/page.tsx",
-                                                        lineNumber: 354,
-                                                        columnNumber: 23
-                                                    }, this)
-                                                }, category, false, {
-                                                    fileName: "[project]/src/app/expense/new/page.tsx",
-                                                    lineNumber: 349,
-                                                    columnNumber: 21
-                                                }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-89d7e3509e2cceba" + " " + "p-2 text-gray-500",
-                                                children: "No categories found."
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/expense/new/page.tsx",
-                                                lineNumber: 358,
-                                                columnNumber: 19
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/app/expense/new/page.tsx",
-                                        lineNumber: 346,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-89d7e3509e2cceba" + " " + "px-2 mt-2",
+                                        className: "jsx-245cdba50398c747" + " " + "px-2 mt-2",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            className: "jsx-89d7e3509e2cceba" + " " + "w-full bg-green-600 text-white py-3 rounded-lg font-semibold text-center transition",
+                                            className: "jsx-245cdba50398c747" + " " + "w-full bg-green-600 text-white py-3 rounded-lg font-semibold text-center transition hover:bg-green-700",
                                             children: "Add Category"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/expense/new/page.tsx",
-                                            lineNumber: 365,
+                                            lineNumber: 466,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/expense/new/page.tsx",
-                                        lineNumber: 362,
+                                        lineNumber: 465,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/expense/new/page.tsx",
-                                lineNumber: 331,
+                                lineNumber: 438,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/expense/new/page.tsx",
-                        lineNumber: 316,
+                        lineNumber: 423,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                id: "89d7e3509e2cceba",
-                children: '.form-control{@apply block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm;}.form-control.expense{background-color:#0000!important}.form-control.search-input{padding-left:40px}.h-79vh{height:79vh}.switch{width:50px;height:24px;display:inline-block;position:relative}.switch input{display:none}.slider{cursor:pointer;background-color:#fff;border:1px solid #009333;border-radius:18px;transition:all .5s;position:absolute;inset:0}.slider:before{content:"";background-color:#009333;border-radius:50%;width:18px;height:18px;transition:all .4s;position:absolute;top:2px;left:2px}input:checked+.slider{background-color:#009333}input:checked+.slider:before{background-color:#fff;transform:translate(27px)}.custom-rounded-t{border-top-left-radius:1.5rem;border-top-right-radius:1.5rem}'
-            }, void 0, false, void 0, this)
+                id: "245cdba50398c747",
+                children: "body{font-family:Inter,sans-serif}.form-control{@apply block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm;}.form-control.expense{background-color:#0000!important}.custom-rounded-t{border-top-left-radius:1.5rem;border-top-right-radius:1.5rem}"
+            }, void 0, false, void 0, this),
+            toastMessage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ToastMessage, {
+                message: toastMessage,
+                type: toastType,
+                onClose: ()=>setToastMessage(null)
+            }, void 0, false, {
+                fileName: "[project]/src/app/expense/new/page.tsx",
+                lineNumber: 491,
+                columnNumber: 9
+            }, this)
         ]
     }, void 0, true);
 }

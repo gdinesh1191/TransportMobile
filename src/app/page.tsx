@@ -41,7 +41,7 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col pt-16 mb-20"> {/* pt-16 for header, mb-20 for nav */}
+    <main className="min-h-screen flex flex-col pt-16 mb-20">  
       {/* Banner Slider */}
       <div className="relative">
         <div id="banner-slider" className="overflow-hidden rounded-xl mx-4 mt-2 border border-gray-100 flex items-center shadow-sm transition-all duration-300">
