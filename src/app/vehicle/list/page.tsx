@@ -5,8 +5,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 // Assuming you have a Layout component at "../../layout"
 // import Layout from "../../layout";
 
-// Define a type for trip data (though not directly used in this specific component's logic yet, good to keep)
-interface Trip {
+ interface Trip {
   id: string;
   vehicleNumber: string;
   fromPlace: string;
@@ -155,8 +154,7 @@ const route=useRouter()
 
 
   return (
-    // <Layout> {/* Uncomment if you have a Layout component */}
-    <main>
+     <main>
       <header
         className="fixed top-0 left-0 right-0 w-full z-20 flex items-center justify-between px-4 bg-white border-b border-gray-200 shadow-sm h-14"
       >
@@ -710,25 +708,26 @@ const route=useRouter()
       </div>
 
       {/* Vehicle Info Off-canvas */}
-      <div
+    
+      {/* <div
         ref={vehicleInfoCanvasRef}
         className={`fixed inset-0 z-50 flex items-end justify-center bg-[rgba(0,0,0,0.5)] ${isVehicleInfoCanvasOpen ? "" : "hidden"}`}
         onClick={(e) => { if (e.target === vehicleInfoCanvasRef.current) closeVehicleInfoCanvas(); }}
       >
         <div className="w-full max-w-md bg-white rounded-t-2xl shadow-lg flex flex-col relative font-[14px]">
-          {/* Close Icon at Top Right */}
+           
           <button onClick={closeVehicleInfoCanvas} className="absolute top-3 right-3 text-gray-500 hover:text-red-500 transition-colors">
             <i className="ri-close-line text-2xl"></i>
           </button>
 
-          {/* Header */}
+          
           <div className="px-4 py-4 border-b border-gray-200 text-center">
             <h3 className="text-lg font-semibold text-gray-800">Vehicle Details</h3>
           </div>
 
-          {/* Body */}
+          
           <div className="p-4 space-y-3 text-gray-700 flex-1">
-            {/* Detail Rows */}
+            
             <div className="flex justify-between">
               <span className="font-medium">Vehicle Number:</span>
               <span id="vehicleNumber" className="text-[#009333]">{vehicleInfoDetails.number}</span>
@@ -766,7 +765,7 @@ const route=useRouter()
               <span id="vehicleClass">{vehicleInfoDetails.vehicleClass}</span>
             </div>
 
-            {/* Certificate Buttons */}
+           
             <div className="grid grid-cols-2 gap-3 mt-5">
               <button className="bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-300 py-2 rounded-xl text-sm flex items-center justify-center gap-2">
                 <i className="ri-file-download-line"></i> RC
@@ -800,7 +799,8 @@ const route=useRouter()
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
     </main>
     // </Layout>
   );
