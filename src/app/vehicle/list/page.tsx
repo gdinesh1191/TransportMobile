@@ -1,5 +1,6 @@
  "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect, useCallback } from "react";
 // Assuming you have a Layout component at "../../layout"
 // import Layout from "../../layout";
@@ -33,6 +34,7 @@ export default function VehicleSearch() {
     fuel: "Diesel", // Example static data
     vehicleClass: "Heavy Motor Vehicle", // Example static data
   });
+const route=useRouter()
 
   // Refs for off-canvas elements to manage their visibility directly if needed,
   // though state-based rendering is generally preferred in React.
@@ -787,11 +789,11 @@ export default function VehicleSearch() {
             </div>
 
             <div className="mt-6 flex space-x-4">
-              <a href="/vehicle/report"
+              <a  onClick={()=>route.push("/vehicle/report")}
                 className="flex-1 text-center bg-[#009333] text-white hover:bg-[#007a29] transition-colors font-medium py-2 rounded-xl">
                 Vehicle Report
               </a>
-              <a href="/vehicle/history"
+              <a  onClick={()=>route.push("/vehicle/history")}
                 className="flex-1 text-center bg-[#c2c2c2] text-black hover:bg-[#007a29] transition-colors font-medium py-2 rounded-xl">
                 Trip History
               </a>

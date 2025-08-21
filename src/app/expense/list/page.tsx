@@ -7,7 +7,7 @@ interface Product {
   id: string;
   name: string;
   category: string;
-  quantity: number; 
+  quantity: number;
   unit: string;
   price: number;
   discount: number;
@@ -148,7 +148,7 @@ export default function ProductsAndServices() {
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <a href="/product/product-search-list.php" className="text-gray-800">
+          <a className="text-gray-800">
             <i className="ri-search-line text-xl"></i>
           </a>
           <button
@@ -240,7 +240,7 @@ export default function ProductsAndServices() {
           </div>
           {/* New Product Button */}
           <a
-            href="/product/product-new.php"
+            
             className="m-2 bg-green-600 transition text-white font-semibold rounded-full shadow w-auto px-4 py-2 ml-auto flex items-center gap-1"
           >
             <i className="ri-add-fill text-xl"></i>NEW PRODUCT

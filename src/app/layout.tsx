@@ -4,6 +4,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { useState } from "react"; // Import useState for off-canvas management
+import { useRouter } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [showCompanyOffcanvas, setShowCompanyOffcanvas] = useState(false);
-
+const route=useRouter()
   const toggleCompanyOffcanvas = () => {
     setShowCompanyOffcanvas(!showCompanyOffcanvas);
   };
@@ -68,33 +69,32 @@ export default function RootLayout({
 
         {/* Common Navigation Bar */}
         <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16 shadow-lg z-10">
-          <a href="/" className="flex flex-col items-center text-black">
+          <a onClick={()=>route.push("/")} className="flex flex-col items-center text-black">
             <i className="ri-home-5-line text-xl mb-1"></i>
             <span className="text-xs">Home</span>
           </a>
           <a
-            href="/approval/list"
+          onClick={()=>route.push("/approval/list")}
+            
             className="flex flex-col items-center text-black"
           >
             <i className="ri-user-line text-xl mb-1"></i>
             <span className="text-xs">Approval</span>
           </a>
-          <a
-            href="/vehicle/list"
+          <a onClick={()=>route.push("/vehicle/list")}
             className="flex flex-col items-center text-black"
           >
             <i className="ri-truck-line text-xl mb-1"></i>
             <span className="text-xs">Vehicle</span>
           </a>
-          <a
-            href="/expense/new"
+          <a onClick={()=>route.push("/expense/new")}
             className="flex flex-col items-center text-black"
           >
             <i className="ri-team-line text-xl mb-1"></i>
             <span className="text-xs">Expense</span>
           </a>
           <a
-            href="/mobile/trip/tripDetails.php"
+           onClick={()=>route.push("/")}
             className="flex flex-col items-center text-black"
           >
             <i className="ri-apps-2-line text-xl mb-1"></i>

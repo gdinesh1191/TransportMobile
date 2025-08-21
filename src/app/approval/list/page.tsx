@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import Layout from "../../layout";
+import RootLayout from "../../layout";
 // Define a type for trip data
 interface Trip {
   id: string;
@@ -164,7 +164,7 @@ export default function TripApproval() {
   };
 
   return (
-    <Layout  >
+    <  >
       <div className="flex-1 flex flex-col pt-16 bg-gray-50">
         {/* Search, Sort, Filter */}
         <div className="flex items-center justify-between px-4 m-1">
@@ -451,6 +451,6 @@ export default function TripApproval() {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }

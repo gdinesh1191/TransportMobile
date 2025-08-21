@@ -135,49 +135,49 @@ export default function Dashboard() {
           <i className="ri-play-circle-fill text-green-500 ml-1 text-3xl"></i>
         </div>
         <div className="grid grid-cols-4 gap-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-          <a href="/invoice/invoice-new.php">
+          <a >
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-bill-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Invoice</span>
             </div>
           </a>
-          <a href="/purchase/purchase-new.php">
+          <a >
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-shopping-cart-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Purchase</span>
             </div>
           </a>
-          <a href="/quotation/quotation-new.php">
+          <a >
             <div className="flex flex-col items-center text-center">
               <i className="ri-file-copy-2-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Quotation</span>
             </div>
           </a>
-          <a href="/dc/dc-new.php">
+          <a >
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-truck-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Delivery Challan</span>
             </div>
           </a>
-          <a href="/s.return/s.return-new.php">
+          <a >
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-refund-2-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Credit Note</span>
             </div>
           </a>
-          <a href="/purchase/purchase-order-new.php">
+          <a >
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-shopping-bag-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Purchase Order</span>
             </div>
           </a>
-          <a href="/modules/expense/new"> {/* Corrected path */}
+          <a > {/* Corrected path */}
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-money-dollar-circle-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Expenses</span>
             </div>
           </a>
-          <a href="/invoice/pro-forma-invoice-new.php">
+          <a >
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-file-paper-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Pro Forma Invoice</span>
