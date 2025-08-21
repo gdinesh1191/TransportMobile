@@ -7,7 +7,7 @@ interface Product {
   id: string;
   name: string;
   category: string;
-  quantity: number;
+  quantity: number; 
   unit: string;
   price: number;
   discount: number;
