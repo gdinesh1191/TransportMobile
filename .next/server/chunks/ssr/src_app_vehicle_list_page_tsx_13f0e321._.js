@@ -9,8 +9,10 @@ __turbopack_context__.s({
     "default": (()=>VehicleSearch)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 function VehicleSearch() {
@@ -31,6 +33,7 @@ function VehicleSearch() {
         fuel: "Diesel",
         vehicleClass: "Heavy Motor Vehicle"
     });
+    const route = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     // Refs for off-canvas elements to manage their visibility directly if needed,
     // though state-based rendering is generally preferred in React.
     // Here, they are mainly used for direct manipulation of classes as in the original jQuery.
@@ -185,12 +188,12 @@ function VehicleSearch() {
                                     className: "ri-arrow-left-line"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 167,
+                                    lineNumber: 169,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 162,
+                                lineNumber: 164,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -198,26 +201,26 @@ function VehicleSearch() {
                                 children: "Vehicle Search"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 169,
+                                lineNumber: 171,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 161,
+                        lineNumber: 163,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center gap-4"
                     }, void 0, false, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 171,
+                        lineNumber: 173,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 158,
+                lineNumber: 160,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -235,7 +238,7 @@ function VehicleSearch() {
                                         children: "Sort"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 181,
+                                        lineNumber: 183,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -244,13 +247,13 @@ function VehicleSearch() {
                                         children: selectedSortOption
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 182,
+                                        lineNumber: 184,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 180,
+                                lineNumber: 182,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -261,7 +264,7 @@ function VehicleSearch() {
                                         className: "ri-filter-2-line"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 190,
+                                        lineNumber: 192,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -269,19 +272,19 @@ function VehicleSearch() {
                                         children: "Filter"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 191,
+                                        lineNumber: 193,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 186,
+                                lineNumber: 188,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 179,
+                        lineNumber: 181,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -311,7 +314,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 206,
+                                                        lineNumber: 208,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -322,7 +325,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 210,
+                                                                lineNumber: 212,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -330,19 +333,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 211,
+                                                                lineNumber: 213,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 209,
+                                                        lineNumber: 211,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 204,
+                                                lineNumber: 206,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -350,13 +353,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 216,
+                                                lineNumber: 218,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 202,
+                                        lineNumber: 204,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -373,7 +376,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 225,
+                                                        lineNumber: 227,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -384,7 +387,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 229,
+                                                                lineNumber: 231,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -392,19 +395,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 230,
+                                                                lineNumber: 232,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 228,
+                                                        lineNumber: 230,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 223,
+                                                lineNumber: 225,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -412,13 +415,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 235,
+                                                lineNumber: 237,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 223,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -435,7 +438,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 244,
+                                                        lineNumber: 246,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -446,7 +449,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 248,
+                                                                lineNumber: 250,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -454,19 +457,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 249,
+                                                                lineNumber: 251,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 247,
+                                                        lineNumber: 249,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 242,
+                                                lineNumber: 244,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -474,13 +477,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 254,
+                                                lineNumber: 256,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 240,
+                                        lineNumber: 242,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -497,7 +500,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 263,
+                                                        lineNumber: 265,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -508,7 +511,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 267,
+                                                                lineNumber: 269,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -516,19 +519,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 268,
+                                                                lineNumber: 270,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 266,
+                                                        lineNumber: 268,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 261,
+                                                lineNumber: 263,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -536,13 +539,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 273,
+                                                lineNumber: 275,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 259,
+                                        lineNumber: 261,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -559,7 +562,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 281,
+                                                        lineNumber: 283,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -570,7 +573,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 285,
+                                                                lineNumber: 287,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -578,19 +581,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 286,
+                                                                lineNumber: 288,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 284,
+                                                        lineNumber: 286,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 279,
+                                                lineNumber: 281,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -598,13 +601,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 291,
+                                                lineNumber: 293,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 277,
+                                        lineNumber: 279,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -621,7 +624,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 299,
+                                                        lineNumber: 301,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -632,7 +635,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 303,
+                                                                lineNumber: 305,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -640,19 +643,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 304,
+                                                                lineNumber: 306,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 302,
+                                                        lineNumber: 304,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 297,
+                                                lineNumber: 299,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -660,13 +663,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 309,
+                                                lineNumber: 311,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 295,
+                                        lineNumber: 297,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -683,7 +686,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 317,
+                                                        lineNumber: 319,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -694,7 +697,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 321,
+                                                                lineNumber: 323,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -702,19 +705,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 322,
+                                                                lineNumber: 324,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 320,
+                                                        lineNumber: 322,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 315,
+                                                lineNumber: 317,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -722,13 +725,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 327,
+                                                lineNumber: 329,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 313,
+                                        lineNumber: 315,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -745,7 +748,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 335,
+                                                        lineNumber: 337,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -756,7 +759,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 339,
+                                                                lineNumber: 341,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -764,19 +767,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 340,
+                                                                lineNumber: 342,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 338,
+                                                        lineNumber: 340,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 333,
+                                                lineNumber: 335,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -784,13 +787,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 345,
+                                                lineNumber: 347,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 331,
+                                        lineNumber: 333,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -807,7 +810,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 353,
+                                                        lineNumber: 355,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -818,7 +821,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 357,
+                                                                lineNumber: 359,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -826,19 +829,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 358,
+                                                                lineNumber: 360,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 356,
+                                                        lineNumber: 358,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 351,
+                                                lineNumber: 353,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -846,13 +849,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 363,
+                                                lineNumber: 365,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 349,
+                                        lineNumber: 351,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -869,7 +872,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 371,
+                                                        lineNumber: 373,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -880,7 +883,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 375,
+                                                                lineNumber: 377,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -888,19 +891,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 376,
+                                                                lineNumber: 378,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 374,
+                                                        lineNumber: 376,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 369,
+                                                lineNumber: 371,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -908,13 +911,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 381,
+                                                lineNumber: 383,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 367,
+                                        lineNumber: 369,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -931,7 +934,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 389,
+                                                        lineNumber: 391,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -942,7 +945,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 393,
+                                                                lineNumber: 395,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -950,19 +953,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 394,
+                                                                lineNumber: 396,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 392,
+                                                        lineNumber: 394,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 387,
+                                                lineNumber: 389,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -970,13 +973,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 399,
+                                                lineNumber: 401,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 385,
+                                        lineNumber: 387,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -993,7 +996,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 407,
+                                                        lineNumber: 409,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1004,7 +1007,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 411,
+                                                                lineNumber: 413,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1012,19 +1015,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 412,
+                                                                lineNumber: 414,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 410,
+                                                        lineNumber: 412,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 405,
+                                                lineNumber: 407,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1032,13 +1035,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 417,
+                                                lineNumber: 419,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 403,
+                                        lineNumber: 405,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1055,7 +1058,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 425,
+                                                        lineNumber: 427,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1066,7 +1069,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 429,
+                                                                lineNumber: 431,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1074,19 +1077,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 430,
+                                                                lineNumber: 432,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 428,
+                                                        lineNumber: 430,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 423,
+                                                lineNumber: 425,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1094,13 +1097,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 435,
+                                                lineNumber: 437,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 421,
+                                        lineNumber: 423,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1117,7 +1120,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 443,
+                                                        lineNumber: 445,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1128,7 +1131,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 447,
+                                                                lineNumber: 449,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1136,19 +1139,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 448,
+                                                                lineNumber: 450,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 446,
+                                                        lineNumber: 448,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 441,
+                                                lineNumber: 443,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1156,13 +1159,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 453,
+                                                lineNumber: 455,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 439,
+                                        lineNumber: 441,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1179,7 +1182,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 461,
+                                                        lineNumber: 463,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1190,7 +1193,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 465,
+                                                                lineNumber: 467,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1198,19 +1201,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 466,
+                                                                lineNumber: 468,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 464,
+                                                        lineNumber: 466,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 459,
+                                                lineNumber: 461,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1218,13 +1221,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 471,
+                                                lineNumber: 473,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 457,
+                                        lineNumber: 459,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1241,7 +1244,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 479,
+                                                        lineNumber: 481,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1252,7 +1255,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 483,
+                                                                lineNumber: 485,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1260,19 +1263,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 484,
+                                                                lineNumber: 486,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 482,
+                                                        lineNumber: 484,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 477,
+                                                lineNumber: 479,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1280,13 +1283,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 489,
+                                                lineNumber: 491,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 475,
+                                        lineNumber: 477,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1303,7 +1306,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 497,
+                                                        lineNumber: 499,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1314,7 +1317,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 501,
+                                                                lineNumber: 503,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1322,19 +1325,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 502,
+                                                                lineNumber: 504,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 500,
+                                                        lineNumber: 502,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 495,
+                                                lineNumber: 497,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1342,13 +1345,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 507,
+                                                lineNumber: 509,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 493,
+                                        lineNumber: 495,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1365,7 +1368,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 515,
+                                                        lineNumber: 517,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1376,7 +1379,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 519,
+                                                                lineNumber: 521,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1384,19 +1387,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 520,
+                                                                lineNumber: 522,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 518,
+                                                        lineNumber: 520,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 513,
+                                                lineNumber: 515,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1404,13 +1407,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 525,
+                                                lineNumber: 527,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 511,
+                                        lineNumber: 513,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1427,7 +1430,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 533,
+                                                        lineNumber: 535,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1438,7 +1441,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 537,
+                                                                lineNumber: 539,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1446,19 +1449,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 538,
+                                                                lineNumber: 540,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 536,
+                                                        lineNumber: 538,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 531,
+                                                lineNumber: 533,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1466,13 +1469,13 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 543,
+                                                lineNumber: 545,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 529,
+                                        lineNumber: 531,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1489,7 +1492,7 @@ function VehicleSearch() {
                                                         className: "ri-truck-line text-xl text-green-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 551,
+                                                        lineNumber: 553,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1500,7 +1503,7 @@ function VehicleSearch() {
                                                                 children: "TN 58 AB 1234"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 555,
+                                                                lineNumber: 557,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1508,19 +1511,19 @@ function VehicleSearch() {
                                                                 children: "16 W - Truck · 2021"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                                lineNumber: 556,
+                                                                lineNumber: 558,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                        lineNumber: 554,
+                                                        lineNumber: 556,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 549,
+                                                lineNumber: 551,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
@@ -1528,35 +1531,35 @@ function VehicleSearch() {
                                                 onClick: ()=>openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 561,
+                                                lineNumber: 563,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 547,
+                                        lineNumber: 549,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 197,
+                                lineNumber: 199,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                            lineNumber: 196,
+                            lineNumber: 198,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 195,
+                        lineNumber: 197,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 177,
+                lineNumber: 179,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1576,7 +1579,7 @@ function VehicleSearch() {
                                     children: "Sort By"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 580,
+                                    lineNumber: 582,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1586,18 +1589,18 @@ function VehicleSearch() {
                                         className: "ri-close-line"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 582,
+                                        lineNumber: 584,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 581,
+                                    lineNumber: 583,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                            lineNumber: 579,
+                            lineNumber: 581,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1610,7 +1613,7 @@ function VehicleSearch() {
                                             children: "Default"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 587,
+                                            lineNumber: 589,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1622,13 +1625,13 @@ function VehicleSearch() {
                                             onChange: handleSortChange
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 588,
+                                            lineNumber: 590,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 586,
+                                    lineNumber: 588,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1638,7 +1641,7 @@ function VehicleSearch() {
                                             children: "Quantity - Low to High"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 591,
+                                            lineNumber: 593,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1650,13 +1653,13 @@ function VehicleSearch() {
                                             onChange: handleSortChange
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 592,
+                                            lineNumber: 594,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 590,
+                                    lineNumber: 592,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1666,7 +1669,7 @@ function VehicleSearch() {
                                             children: "Quantity - High to Low"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 595,
+                                            lineNumber: 597,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1678,13 +1681,13 @@ function VehicleSearch() {
                                             onChange: handleSortChange
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 596,
+                                            lineNumber: 598,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 594,
+                                    lineNumber: 596,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1694,7 +1697,7 @@ function VehicleSearch() {
                                             children: "Product Name - A to Z"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 599,
+                                            lineNumber: 601,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1706,13 +1709,13 @@ function VehicleSearch() {
                                             onChange: handleSortChange
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 600,
+                                            lineNumber: 602,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 598,
+                                    lineNumber: 600,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1722,7 +1725,7 @@ function VehicleSearch() {
                                             children: "Product Name - Z to A"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 603,
+                                            lineNumber: 605,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1734,30 +1737,30 @@ function VehicleSearch() {
                                             onChange: handleSortChange
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 604,
+                                            lineNumber: 606,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 602,
+                                    lineNumber: 604,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                            lineNumber: 585,
+                            lineNumber: 587,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                    lineNumber: 578,
+                    lineNumber: 580,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 573,
+                lineNumber: 575,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1766,7 +1769,7 @@ function VehicleSearch() {
                 onClick: closeFilterOffcanvas
             }, void 0, false, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 611,
+                lineNumber: 613,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1782,12 +1785,12 @@ function VehicleSearch() {
                                     className: "w-16 h-1 bg-gray-400 rounded-full mt-2"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 624,
+                                    lineNumber: 626,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 623,
+                                lineNumber: 625,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1798,7 +1801,7 @@ function VehicleSearch() {
                                         children: "Applied by"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 627,
+                                        lineNumber: 629,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1808,24 +1811,24 @@ function VehicleSearch() {
                                             className: "ri-close-line text-2xl"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 629,
+                                            lineNumber: 631,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 628,
+                                        lineNumber: 630,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 626,
+                                lineNumber: 628,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 622,
+                        lineNumber: 624,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1837,7 +1840,7 @@ function VehicleSearch() {
                                     children: "Vehicle Number"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 636,
+                                    lineNumber: 638,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1852,7 +1855,7 @@ function VehicleSearch() {
                                             readOnly: true
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 638,
+                                            lineNumber: 640,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1861,29 +1864,29 @@ function VehicleSearch() {
                                                 className: "ri-arrow-down-s-fill text-gray-800 text-lg"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                lineNumber: 646,
+                                                lineNumber: 648,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 645,
+                                            lineNumber: 647,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 637,
+                                    lineNumber: 639,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                            lineNumber: 635,
+                            lineNumber: 637,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 633,
+                        lineNumber: 635,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1895,7 +1898,7 @@ function VehicleSearch() {
                                 children: "Cancel"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 653,
+                                lineNumber: 655,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1903,19 +1906,19 @@ function VehicleSearch() {
                                 children: "Submit"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 654,
+                                lineNumber: 656,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 652,
+                        lineNumber: 654,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 618,
+                lineNumber: 620,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1924,7 +1927,7 @@ function VehicleSearch() {
                 onClick: closeCategoryOffcanvas
             }, void 0, false, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 659,
+                lineNumber: 661,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1940,12 +1943,12 @@ function VehicleSearch() {
                                     className: "w-16 h-1 bg-gray-400 rounded-full mt-2"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 672,
+                                    lineNumber: 674,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 671,
+                                lineNumber: 673,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1956,7 +1959,7 @@ function VehicleSearch() {
                                         children: "Select Vehicle Number"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 675,
+                                        lineNumber: 677,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1966,24 +1969,24 @@ function VehicleSearch() {
                                             className: "ri-close-line text-2xl"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 677,
+                                            lineNumber: 679,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 676,
+                                        lineNumber: 678,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 674,
+                                lineNumber: 676,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 670,
+                        lineNumber: 672,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2001,7 +2004,7 @@ function VehicleSearch() {
                                         onChange: (e)=>setSearchVehicleInput(e.target.value)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 683,
+                                        lineNumber: 685,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2010,18 +2013,18 @@ function VehicleSearch() {
                                             className: "ri-search-line text-gray-400 text-lg"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 692,
+                                            lineNumber: 694,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 691,
+                                        lineNumber: 693,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 682,
+                                lineNumber: 684,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2033,29 +2036,29 @@ function VehicleSearch() {
                                             children: number
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 703,
+                                            lineNumber: 705,
                                             columnNumber: 17
                                         }, this)
                                     }, index, false, {
                                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                        lineNumber: 698,
+                                        lineNumber: 700,
                                         columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 696,
+                                lineNumber: 698,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/vehicle/list/page.tsx",
-                        lineNumber: 681,
+                        lineNumber: 683,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 666,
+                lineNumber: 668,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2074,12 +2077,12 @@ function VehicleSearch() {
                                 className: "ri-close-line text-2xl"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 719,
+                                lineNumber: 721,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                            lineNumber: 718,
+                            lineNumber: 720,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2089,12 +2092,12 @@ function VehicleSearch() {
                                 children: "Vehicle Details"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                lineNumber: 724,
+                                lineNumber: 726,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                            lineNumber: 723,
+                            lineNumber: 725,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2108,7 +2111,7 @@ function VehicleSearch() {
                                             children: "Vehicle Number:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 731,
+                                            lineNumber: 733,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2117,13 +2120,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.number
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 732,
+                                            lineNumber: 734,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 730,
+                                    lineNumber: 732,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2134,7 +2137,7 @@ function VehicleSearch() {
                                             children: "Type:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 735,
+                                            lineNumber: 737,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2142,13 +2145,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.type
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 736,
+                                            lineNumber: 738,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 734,
+                                    lineNumber: 736,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2159,7 +2162,7 @@ function VehicleSearch() {
                                             children: "Year:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 739,
+                                            lineNumber: 741,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2167,13 +2170,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.year
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 740,
+                                            lineNumber: 742,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 738,
+                                    lineNumber: 740,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2184,7 +2187,7 @@ function VehicleSearch() {
                                             children: "Chassis Number:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 743,
+                                            lineNumber: 745,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2192,13 +2195,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.chassis
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 744,
+                                            lineNumber: 746,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 742,
+                                    lineNumber: 744,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2209,7 +2212,7 @@ function VehicleSearch() {
                                             children: "Engine Number:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 747,
+                                            lineNumber: 749,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2217,13 +2220,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.engine
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 748,
+                                            lineNumber: 750,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 746,
+                                    lineNumber: 748,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2234,7 +2237,7 @@ function VehicleSearch() {
                                             children: "Owner Name:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 751,
+                                            lineNumber: 753,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2243,13 +2246,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.owner
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 752,
+                                            lineNumber: 754,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 750,
+                                    lineNumber: 752,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2260,7 +2263,7 @@ function VehicleSearch() {
                                             children: "Registration Date:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 755,
+                                            lineNumber: 757,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2268,13 +2271,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.regDate
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 756,
+                                            lineNumber: 758,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 754,
+                                    lineNumber: 756,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2285,7 +2288,7 @@ function VehicleSearch() {
                                             children: "Fuel Type:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 759,
+                                            lineNumber: 761,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2293,13 +2296,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.fuel
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 760,
+                                            lineNumber: 762,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 758,
+                                    lineNumber: 760,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2310,7 +2313,7 @@ function VehicleSearch() {
                                             children: "Vehicle Class:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 763,
+                                            lineNumber: 765,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2318,13 +2321,13 @@ function VehicleSearch() {
                                             children: vehicleInfoDetails.vehicleClass
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 764,
+                                            lineNumber: 766,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 762,
+                                    lineNumber: 764,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2337,14 +2340,14 @@ function VehicleSearch() {
                                                     className: "ri-file-download-line"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                    lineNumber: 770,
+                                                    lineNumber: 772,
                                                     columnNumber: 17
                                                 }, this),
                                                 " RC"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 769,
+                                            lineNumber: 771,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2354,14 +2357,14 @@ function VehicleSearch() {
                                                     className: "ri-file-download-line"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                    lineNumber: 773,
+                                                    lineNumber: 775,
                                                     columnNumber: 17
                                                 }, this),
                                                 " FC"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 772,
+                                            lineNumber: 774,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2371,14 +2374,14 @@ function VehicleSearch() {
                                                     className: "ri-file-download-line"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                    lineNumber: 776,
+                                                    lineNumber: 778,
                                                     columnNumber: 17
                                                 }, this),
                                                 " Insurance"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 775,
+                                            lineNumber: 777,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2388,14 +2391,14 @@ function VehicleSearch() {
                                                     className: "ri-file-download-line"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                    lineNumber: 779,
+                                                    lineNumber: 781,
                                                     columnNumber: 17
                                                 }, this),
                                                 " Pollution"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 778,
+                                            lineNumber: 780,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2405,14 +2408,14 @@ function VehicleSearch() {
                                                     className: "ri-file-download-line"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                    lineNumber: 782,
+                                                    lineNumber: 784,
                                                     columnNumber: 17
                                                 }, this),
                                                 " Permit"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 781,
+                                            lineNumber: 783,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2422,70 +2425,70 @@ function VehicleSearch() {
                                                     className: "ri-file-download-line"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                                    lineNumber: 785,
+                                                    lineNumber: 787,
                                                     columnNumber: 17
                                                 }, this),
                                                 " Tax"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 784,
+                                            lineNumber: 786,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 768,
+                                    lineNumber: 770,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "mt-6 flex space-x-4",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                            href: "/vehicle/report",
+                                            onClick: ()=>route.push("/vehicle/report"),
                                             className: "flex-1 text-center bg-[#009333] text-white hover:bg-[#007a29] transition-colors font-medium py-2 rounded-xl",
                                             children: "Vehicle Report"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 790,
+                                            lineNumber: 792,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                            href: "/vehicle/history",
+                                            onClick: ()=>route.push("/vehicle/history"),
                                             className: "flex-1 text-center bg-[#c2c2c2] text-black hover:bg-[#007a29] transition-colors font-medium py-2 rounded-xl",
                                             children: "Trip History"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                            lineNumber: 794,
+                                            lineNumber: 796,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                                    lineNumber: 789,
+                                    lineNumber: 791,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/vehicle/list/page.tsx",
-                            lineNumber: 728,
+                            lineNumber: 730,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/vehicle/list/page.tsx",
-                    lineNumber: 716,
+                    lineNumber: 718,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/vehicle/list/page.tsx",
-                lineNumber: 711,
+                lineNumber: 713,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/vehicle/list/page.tsx",
-        lineNumber: 157,
+        lineNumber: 159,
         columnNumber: 5
     }, this));
 }
