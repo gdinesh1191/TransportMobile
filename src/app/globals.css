@@ -1,0 +1,67 @@
+@import "tailwindcss";
+ 
+/* Your existing global styles */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+ 
+  color: var(--foreground);
+  font-family: "Inter", sans-serif;
+}
+body {
+ 
+  background-color: #f9fafb;
+} 
+.form-control.expense {
+  background-color: transparent !important;
+}
+
+.form-control.search-input {
+  padding-left: 40px;
+}
+.icon-sm {
+  font-size: 1.5rem;
+}
+
+.form-control {
+width: 100%;
+border: 2px solid #e5e7eb;
+border-radius: 0.375rem;
+padding: 0.5rem 0.75rem;
+}
+
+.form-control:focus {
+outline: none;
+border-color: #22c55e;
+}
+
+.form-control::placeholder {
+color: #6b7280;  
+}
+
+.custom-rounded-t {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+input[type="radio"].custom-green {
+  accent-color: #059669;
+  border-color: #059669;
+}
