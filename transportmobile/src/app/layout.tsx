@@ -54,7 +54,7 @@ export default function RootLayout({
   // This effect redirects the user to /vehicle/list if they visit the root URL
   useEffect(() => {
     if (pathname === "/") {
-      route.push("/vehicle/list");
+      route.push("/approval/list");
     }
   }, [pathname, route]);
 
