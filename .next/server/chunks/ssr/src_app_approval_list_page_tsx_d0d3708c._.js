@@ -13,55 +13,53 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 "use client";
 ;
 ;
-// Dummy data for trips - replace with actual data fetching
-// const DUMMY_TRIPS: Trip[] = [
-//   {
-//     id: "1",
-//     vehicleNumber: "TN38NK3456",
-//     fromPlace: "Karur",
-//     toPlace: "Namakkal",
-//     date: "30/05/2025",
-//     product: "Tapioca",
-//     quantity: "120 kg",
-//   },
-//   {
-//     id: "2",
-//     vehicleNumber: "MH 12 AB 1234",
-//     fromPlace: "Mumbai",
-//     toPlace: "Pune",
-//     date: "01/06/2025",
-//     product: "Grains",
-//     quantity: "500 kg",
-//   },
-//   {
-//     id: "3",
-//     vehicleNumber: "DL 01 ZZ 4321",
-//     fromPlace: "Delhi",
-//     toPlace: "Jaipur",
-//     date: "02/06/2025",
-//     product: "Vegetables",
-//     quantity: "80 kg",
-//   },
-//   {
-//     id: "4",
-//     vehicleNumber: "KA 05 CD 8765",
-//     fromPlace: "Bangalore",
-//     toPlace: "Mysore",
-//     date: "03/06/2025",
-//     product: "Fruits",
-//     quantity: "200 kg",
-//   },
-//   {
-//     id: "5",
-//     vehicleNumber: "TN 22 GH 2345",
-//     fromPlace: "Chennai",
-//     toPlace: "Madurai",
-//     date: "04/06/2025",
-//     product: "Textiles",
-//     quantity: "100 kg",
-//   },
-// ];
-// Dummy data for vehicle numbers - replace with actual data fetching
+const DUMMY_TRIPS = [
+    {
+        id: "1",
+        vehicleNumber: "TN38NK3456",
+        fromPlace: "Karur",
+        toPlace: "Namakkal",
+        date: "30/05/2025",
+        product: "Tapioca",
+        quantity: "120 kg"
+    },
+    {
+        id: "2",
+        vehicleNumber: "MH 12 AB 1234",
+        fromPlace: "Mumbai",
+        toPlace: "Pune",
+        date: "01/06/2025",
+        product: "Grains",
+        quantity: "500 kg"
+    },
+    {
+        id: "3",
+        vehicleNumber: "DL 01 ZZ 4321",
+        fromPlace: "Delhi",
+        toPlace: "Jaipur",
+        date: "02/06/2025",
+        product: "Vegetables",
+        quantity: "80 kg"
+    },
+    {
+        id: "4",
+        vehicleNumber: "KA 05 CD 8765",
+        fromPlace: "Bangalore",
+        toPlace: "Mysore",
+        date: "03/06/2025",
+        product: "Fruits",
+        quantity: "200 kg"
+    },
+    {
+        id: "5",
+        vehicleNumber: "TN 22 GH 2345",
+        fromPlace: "Chennai",
+        toPlace: "Madurai",
+        date: "04/06/2025",
+        product: "Textiles",
+        quantity: "100 kg"
+    }
+];
 const DUMMY_VEHICLE_NUMBERS = [
     "MH 12 AB 1234",
     "MH 14 XY 5678",
@@ -160,7 +158,7 @@ function TripApproval() {
                                         children: "Sort"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 177,
+                                        lineNumber: 173,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -169,13 +167,13 @@ function TripApproval() {
                                         children: selectedSort
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 178,
+                                        lineNumber: 174,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 172,
+                                lineNumber: 168,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -187,7 +185,7 @@ function TripApproval() {
                                         className: "ri-filter-2-line"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 187,
+                                        lineNumber: 183,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -195,19 +193,19 @@ function TripApproval() {
                                         children: "Filter"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 188,
+                                        lineNumber: 184,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 182,
+                                lineNumber: 178,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/approval/list/page.tsx",
-                        lineNumber: 171,
+                        lineNumber: 167,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -221,7 +219,7 @@ function TripApproval() {
                                     children: "No trips found matching your criteria."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 196,
+                                    lineNumber: 192,
                                     columnNumber: 17
                                 }, this) : sortedAndFilteredTrips.map((trip)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "relative bg-white border border-gray-100 rounded-xl p-4 max-w-md mx-auto",
@@ -237,7 +235,26 @@ function TripApproval() {
                                                                 children: trip.vehicleNumber
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                                lineNumber: 207,
+                                                                lineNumber: 203,
+                                                                columnNumber: 25
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "text-sm font-medium text-gray-700 flex items-center gap-1",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                                        className: "ri-map-pin-line text-gray-500"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/approval/list/page.tsx",
+                                                                        lineNumber: 207,
+                                                                        columnNumber: 27
+                                                                    }, this),
+                                                                    " ",
+                                                                    "From: ",
+                                                                    trip.fromPlace
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/src/app/approval/list/page.tsx",
+                                                                lineNumber: 206,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -250,38 +267,19 @@ function TripApproval() {
                                                                         lineNumber: 211,
                                                                         columnNumber: 27
                                                                     }, this),
-                                                                    " ",
-                                                                    "From: ",
-                                                                    trip.fromPlace
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/app/approval/list/page.tsx",
-                                                                lineNumber: 210,
-                                                                columnNumber: 25
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: "text-sm font-medium text-gray-700 flex items-center gap-1",
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
-                                                                        className: "ri-map-pin-line text-gray-500"
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/src/app/approval/list/page.tsx",
-                                                                        lineNumber: 215,
-                                                                        columnNumber: 27
-                                                                    }, this),
                                                                     " To:",
                                                                     " ",
                                                                     trip.toPlace
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                                lineNumber: 214,
+                                                                lineNumber: 210,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                                        lineNumber: 206,
+                                                        lineNumber: 202,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -292,7 +290,7 @@ function TripApproval() {
                                                                 children: trip.date
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                                lineNumber: 221,
+                                                                lineNumber: 217,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -300,7 +298,7 @@ function TripApproval() {
                                                                 children: trip.product
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                                lineNumber: 224,
+                                                                lineNumber: 220,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -311,19 +309,19 @@ function TripApproval() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                                lineNumber: 227,
+                                                                lineNumber: 223,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                                        lineNumber: 220,
+                                                        lineNumber: 216,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                lineNumber: 205,
+                                                lineNumber: 201,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -335,7 +333,7 @@ function TripApproval() {
                                                         children: "Approve"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                                        lineNumber: 234,
+                                                        lineNumber: 230,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -344,40 +342,40 @@ function TripApproval() {
                                                         children: "Reject"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                                        lineNumber: 240,
+                                                        lineNumber: 236,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                lineNumber: 233,
+                                                lineNumber: 229,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, trip.id, true, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 201,
+                                        lineNumber: 197,
                                         columnNumber: 19
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 194,
+                                lineNumber: 190,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/approval/list/page.tsx",
-                            lineNumber: 193,
+                            lineNumber: 189,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/approval/list/page.tsx",
-                        lineNumber: 192,
+                        lineNumber: 188,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/approval/list/page.tsx",
-                lineNumber: 169,
+                lineNumber: 165,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -395,7 +393,7 @@ function TripApproval() {
                                     children: "Sort By"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 269,
+                                    lineNumber: 265,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -406,18 +404,18 @@ function TripApproval() {
                                         className: "ri-close-line"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 275,
+                                        lineNumber: 271,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 270,
+                                    lineNumber: 266,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/approval/list/page.tsx",
-                            lineNumber: 268,
+                            lineNumber: 264,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -435,7 +433,7 @@ function TripApproval() {
                                             children: option
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 290,
+                                            lineNumber: 286,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -450,29 +448,29 @@ function TripApproval() {
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 291,
+                                            lineNumber: 287,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, option, true, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 286,
+                                    lineNumber: 282,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/approval/list/page.tsx",
-                            lineNumber: 278,
+                            lineNumber: 274,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/approval/list/page.tsx",
-                    lineNumber: 263,
+                    lineNumber: 259,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/approval/list/page.tsx",
-                lineNumber: 256,
+                lineNumber: 252,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -484,7 +482,7 @@ function TripApproval() {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/approval/list/page.tsx",
-                lineNumber: 309,
+                lineNumber: 305,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -501,12 +499,12 @@ function TripApproval() {
                                     className: "w-16 h-1 bg-gray-400 rounded-full mt-2"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 332,
+                                    lineNumber: 328,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 331,
+                                lineNumber: 327,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -517,7 +515,7 @@ function TripApproval() {
                                         children: "Applied by"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 335,
+                                        lineNumber: 331,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -528,24 +526,24 @@ function TripApproval() {
                                             className: "ri-close-line text-2xl"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 341,
+                                            lineNumber: 337,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 336,
+                                        lineNumber: 332,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 334,
+                                lineNumber: 330,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/approval/list/page.tsx",
-                        lineNumber: 330,
+                        lineNumber: 326,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -557,7 +555,7 @@ function TripApproval() {
                                     children: "Vehicle Number"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 349,
+                                    lineNumber: 345,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -573,7 +571,7 @@ function TripApproval() {
                                             readOnly: true
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 357,
+                                            lineNumber: 353,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -582,29 +580,29 @@ function TripApproval() {
                                                 className: "ri-arrow-down-s-fill text-gray-800 text-lg"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                                lineNumber: 365,
+                                                lineNumber: 361,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 364,
+                                            lineNumber: 360,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 352,
+                                    lineNumber: 348,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/approval/list/page.tsx",
-                            lineNumber: 348,
+                            lineNumber: 344,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/approval/list/page.tsx",
-                        lineNumber: 346,
+                        lineNumber: 342,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -619,7 +617,7 @@ function TripApproval() {
                                 children: "Clear"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 372,
+                                lineNumber: 368,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -628,19 +626,19 @@ function TripApproval() {
                                 children: "Apply"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 381,
+                                lineNumber: 377,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/approval/list/page.tsx",
-                        lineNumber: 371,
+                        lineNumber: 367,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/approval/list/page.tsx",
-                lineNumber: 323,
+                lineNumber: 319,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -657,12 +655,12 @@ function TripApproval() {
                                     className: "w-16 h-1 bg-gray-400 rounded-full mt-2"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 400,
+                                    lineNumber: 396,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 399,
+                                lineNumber: 395,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -673,7 +671,7 @@ function TripApproval() {
                                         children: "Select Vehicle Number"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 403,
+                                        lineNumber: 399,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -684,24 +682,24 @@ function TripApproval() {
                                             className: "ri-close-line text-2xl"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 411,
+                                            lineNumber: 407,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 406,
+                                        lineNumber: 402,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 402,
+                                lineNumber: 398,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/approval/list/page.tsx",
-                        lineNumber: 398,
+                        lineNumber: 394,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -720,7 +718,7 @@ function TripApproval() {
                                         onChange: (e)=>setSearchVehicleTerm(e.target.value)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 417,
+                                        lineNumber: 413,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -729,18 +727,18 @@ function TripApproval() {
                                             className: "ri-search-line text-gray-400 text-lg"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 426,
+                                            lineNumber: 422,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 425,
+                                        lineNumber: 421,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 416,
+                                lineNumber: 412,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -750,7 +748,7 @@ function TripApproval() {
                                     children: "No matching vehicle numbers found."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/approval/list/page.tsx",
-                                    lineNumber: 432,
+                                    lineNumber: 428,
                                     columnNumber: 15
                                 }, this) : filteredVehicleNumbers.map((number)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: `p-2 flex items-center cursor-pointer hover:bg-gray-100 ${selectedVehicleNumber === number ? "bg-blue-50 font-semibold" : ""}`,
@@ -763,29 +761,29 @@ function TripApproval() {
                                             children: number
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/approval/list/page.tsx",
-                                            lineNumber: 448,
+                                            lineNumber: 444,
                                             columnNumber: 19
                                         }, this)
                                     }, number, false, {
                                         fileName: "[project]/src/app/approval/list/page.tsx",
-                                        lineNumber: 437,
+                                        lineNumber: 433,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/approval/list/page.tsx",
-                                lineNumber: 430,
+                                lineNumber: 426,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/approval/list/page.tsx",
-                        lineNumber: 415,
+                        lineNumber: 411,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/approval/list/page.tsx",
-                lineNumber: 391,
+                lineNumber: 387,
                 columnNumber: 7
             }, this)
         ]

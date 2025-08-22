@@ -1025,6 +1025,10 @@
     background-color: oklab(57.7688% -.144342 .0942869 / .05);
   }
 
+  .bg-\[\#009333\]\/10 {
+    background-color: oklab(57.7688% -.144342 .0942869 / .1);
+  }
+
   .bg-\[\#c2c2c2\] {
     background-color: #c2c2c2;
   }
@@ -1181,8 +1185,8 @@
     padding-top: calc(var(--spacing) * 2);
   }
 
-  .pt-3 {
-    padding-top: calc(var(--spacing) * 3);
+  .pt-6 {
+    padding-top: calc(var(--spacing) * 6);
   }
 
   .pt-16 {
