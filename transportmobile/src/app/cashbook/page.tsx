@@ -1,6 +1,7 @@
  "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { postData } from "../utils/api"; // adjust path if needed
 
 interface CashbookEntry {
   id: string;
@@ -8,33 +9,49 @@ interface CashbookEntry {
   credit: number;
   debit: number;
 }
-const cashbookData: CashbookEntry[] = [
-    { id: "1", date: "08-01-2025", credit: 50000.0, debit: 0.0 },
-    { id: "2", date: "08-01-2025", credit: 0.0, debit: 2500.0 },
-    { id: "3", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
-    { id: "4", date: "08-02-2025", credit: 0.0, debit: 350.0 },
-    { id: "5", date: "08-02-2025", credit: 7500.0, debit: 0.0 },
-    { id: "6", date: "08-01-2025", credit: 0.0, debit: 2500.0 },
-    { id: "7", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
-    { id: "8", date: "08-02-2025", credit: 0.0, debit: 350.0 },
-    { id: "9", date: "08-02-2025", credit: 7500.0, debit: 0.0 },
-    { id: "10", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
-    { id: "11", date: "08-02-2025", credit: 0.0, debit: 350.0 },
-   { id: "12", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
-    { id: "13", date: "08-02-2025", credit: 0.0, debit: 350.0 },
-    { id: "14", date: "08-01-2025", credit: 0.0, debit: 2500.0 },
-    { id: "15", date: "08-02-2025", credit: 15000.0, debit: 0.0 },
-    { id: "16", date: "08-02-2025", credit: 7500.0, debit: 0.0 },
-  ];
-  
 
 type SortOption = "Default" | "Credit" | "Debit";
 
 export default function Cashbook() {
+  const [cashbookData, setCashbookData] = useState<CashbookEntry[]>([]);
   const [isSortOffcanvasOpen, setIsSortOffcanvasOpen] = useState(false);
   const [sortText, setSortText] = useState<SortOption>("Default");
+  const [loading, setLoading] = useState<boolean>(true);
 
   const sortOffcanvasRef = useRef<HTMLDivElement>(null);
+  const fetchTrips = async () => {
+    try {
+      const payload = {
+        token: "getTripExpense",
+        data: {},
+      };
+  
+      const result = await postData<any>(payload);
+  
+      if (result.status === "success" && Array.isArray(result.tripExpenses)) {
+        const mappedExpenses: CashbookEntry[] = result.tripExpenses.map((expense: any) => ({
+          id: expense.id,
+          date: expense.expenseDate.replace(/\\\//g, "/"), // format date if needed
+          debit: parseFloat(expense.amount) || 0,
+          credit: 0,
+        }));
+  
+        setCashbookData(mappedExpenses); // or merge with existing if needed
+      } else {
+        console.error("API did not return valid tripExpenses:", result);
+        setCashbookData([]);
+      }
+    } catch (error) {
+      console.error("Error fetching expenses:", error);
+      setCashbookData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchTrips();
+  }, []);
 
   const handleSortChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSortText(event.target.value as SortOption);
@@ -81,7 +98,7 @@ export default function Cashbook() {
         </div>
       </header>
 
-      <main className=" flex flex-col pt-16 bg-gray-50">
+      <main className="flex flex-col pt-16 bg-gray-50">
         {/* Sort Button */}
         <div className="flex items-center justify-between px-4 m-1">
           <div
@@ -109,14 +126,18 @@ export default function Cashbook() {
                 </tr>
               </thead>
               <tbody>
-                {sortedData.length > 0 ? (
+                {loading ? (
+                  <tr>
+                    <td colSpan={3} className="text-center py-6 text-gray-400">Loading...</td>
+                  </tr>
+                ) : sortedData.length > 0 ? (
                   sortedData.map((entry, idx) => (
                     <tr key={entry.id} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                       <td className="px-4 py-3 border-b">{entry.date}</td>
-                      <td className="px-4 py-3 border-b text-right  ">
+                      <td className="px-4 py-3 border-b text-right">
                         {entry.credit > 0 ? entry.credit.toFixed(2) : "-"}
                       </td>
-                      <td className="px-4 py-3 border-b text-right ">
+                      <td className="px-4 py-3 border-b text-right">
                         {entry.debit > 0 ? entry.debit.toFixed(2) : "-"}
                       </td>
                     </tr>
@@ -132,7 +153,7 @@ export default function Cashbook() {
             </table>
           </div>
 
-          {/* Sticky Totals Footer */}
+          
           <div className="sticky bottom-0 bg-gray-100 border-t font-semibold">
             <table className="min-w-full text-sm">
               <tfoot>
@@ -144,7 +165,7 @@ export default function Cashbook() {
                   <td className="px-4 py-3 text-right text-red-700">
                     ₹{totalDebit.toFixed(2)}
                   </td>
-                </tr>
+                </tr> 
               </tfoot>
             </table>
           </div>
@@ -152,7 +173,6 @@ export default function Cashbook() {
 
         {/* Sort Off-canvas */}
         <div
-          id="sort-offcanvas"
           className={`fixed inset-0 z-50 flex items-end justify-center transition-opacity duration-300 ${
             isSortOffcanvasOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
@@ -167,7 +187,6 @@ export default function Cashbook() {
             <div className="flex items-center justify-between pl-6 pr-5 py-3 border-b-2">
               <h3 className="text-lg font-semibold text-gray-800">Sort By</h3>
               <button
-                id="close-sort"
                 className="text-gray-500 text-2xl focus:outline-none"
                 onClick={() => setIsSortOffcanvasOpen(false)}
               >
@@ -175,39 +194,26 @@ export default function Cashbook() {
               </button>
             </div>
             <div className="flex flex-col">
-              <label className="flex items-center justify-between px-6 py-3 cursor-pointer">
-                <span>Default (by Date)</span>
-                <input
-                  type="radio"
-                  name="sort"
-                  value="Default"
-                  className="accent-green-600"
-                  checked={sortText === "Default"}
-                  onChange={handleSortChange}
-                />
-              </label>
-              <label className="flex items-center justify-between px-6 py-3 cursor-pointer">
-                <span>Credit - High to Low</span>
-                <input
-                  type="radio"
-                  name="sort"
-                  value="Credit"
-                  className="accent-green-600"
-                  checked={sortText === "Credit"}
-                  onChange={handleSortChange}
-                />
-              </label>
-              <label className="flex items-center justify-between px-6 py-3 cursor-pointer">
-                <span>Debit - High to Low</span>
-                <input
-                  type="radio"
-                  name="sort"
-                  value="Debit"
-                  className="accent-green-600"
-                  checked={sortText === "Debit"}
-                  onChange={handleSortChange}
-                />
-              </label>
+              {["Default", "Credit", "Debit"].map((option) => (
+                <label
+                  key={option}
+                  className="flex items-center justify-between px-6 py-3 cursor-pointer"
+                >
+                  <span>
+                    {option === "Default"
+                      ? "Default (by Date)"
+                      : `${option} - High to Low`}
+                  </span>
+                  <input
+                    type="radio"
+                    name="sort"
+                    value={option}
+                    className="accent-green-600"
+                    checked={sortText === option}
+                    onChange={handleSortChange}
+                  />
+                </label>
+              ))}
             </div>
           </div>
         </div>

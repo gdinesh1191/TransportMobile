@@ -2,8 +2,8 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,21 +21,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [pageTitle, setPageTitle] = useState("Home"); // Default title
+  const [pageTitle, setPageTitle] = useState("Home");
   const route = useRouter();
+  const pathname = usePathname();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
   const menuItems = [
-    { label: "Home", icon: "ri-home-5-line", path: "/" },
     { label: "Approval", icon: "ri-check-double-line", path: "/approval/list" },
     { label: "Vehicle", icon: "ri-truck-line", path: "/vehicle/list" },
     { label: "Expense", icon: "ri-wallet-3-line", path: "/expense/new" },
     { label: "Cashbook", icon: "ri-cash-line", path: "/cashbook" },
-    { label: "Trip", icon: "ri-road-map-line", path: "/" },
+    // { label: "Trip", icon: "ri-road-map-line", path: "/" },
   ];
+
+  // This effect sets the page title based on the current URL
+  useEffect(() => {
+    const currentItem = menuItems.find((item) => item.path === pathname);
+    if (currentItem) {
+      setPageTitle(currentItem.label);
+    } else if (pathname.startsWith("/vehicle")) {
+      setPageTitle("Vehicle");
+    } else if (pathname.startsWith("/approval")) {
+      setPageTitle("Approval");
+    } else {
+      setPageTitle("Home"); // Fallback for other routes
+    }
+  }, [pathname, menuItems]);
+
+  // This effect redirects the user to /vehicle/list if they visit the root URL
+  useEffect(() => {
+    if (pathname === "/") {
+      route.push("/vehicle/list");
+    }
+  }, [pathname, route]);
 
   return (
     <html lang="en">
@@ -104,11 +125,17 @@ export default function RootLayout({
               <button
                 key={idx}
                 onClick={() => {
-                  setPageTitle(item.label); // 🔥 set title here
+                  setPageTitle(item.label);
                   route.push(item.path);
                   toggleSidebar();
                 }}
-                className="flex items-center gap-3 text-gray-700 hover:bg-[#009333]/10 hover:text-[#009333] px-4 py-3 transition rounded-lg"
+                className={`flex items-center gap-3 text-gray-700 hover:bg-[#009333]/10 hover:text-[#009333] px-4 py-3 transition rounded-lg ${
+                  (pathname === item.path ||
+                    (item.path === "/vehicle/list" &&
+                      pathname.startsWith("/vehicle")))
+                    ? "bg-[#009333]/10 text-[#009333]"
+                    : ""
+                }`}
               >
                 <i className={`${item.icon} text-xl`}></i>
                 <span className="font-medium">{item.label}</span>
@@ -131,7 +158,7 @@ export default function RootLayout({
           </div>
         </aside>
 
-        <main className="pt-3 p-2">{children}</main>
+        <main className="pt-6 p-2">{children}</main>
       </body>
     </html>
   );
