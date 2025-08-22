@@ -32,7 +32,7 @@ export default function RootLayout({
   const menuItems = [
     { label: "Approval", icon: "ri-check-double-line", path: "/approval/list" },
     { label: "Vehicle", icon: "ri-truck-line", path: "/vehicle/list" },
-    { label: "Expense", icon: "ri-wallet-3-line", path: "/expense/new" },
+    { label: "Expense", icon: "ri-wallet-3-line", path: "/expense/list" },
     { label: "Cashbook", icon: "ri-cash-line", path: "/cashbook" },
     // { label: "Trip", icon: "ri-road-map-line", path: "/" },
   ];
