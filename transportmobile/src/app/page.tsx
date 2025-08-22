@@ -1,4 +1,4 @@
- "use client"; // This component uses client-side hooks like useState and useEffect
+ "use client"; 
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -6,13 +6,13 @@ import { useState, useEffect } from "react";
 export default function Dashboard() {
   // Banner Slider State
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 3; // Based on your HTML
+  const totalSlides = 3; 
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
-    }, 5000); // Change slide every 5 seconds
-    return () => clearInterval(interval); // Clear interval on component unmount
+    }, 5000);  
+    return () => clearInterval(interval);  
   }, [totalSlides]);
 
   const goToSlide = (index: number) => {
@@ -41,7 +41,7 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col pt-16 mb-20"> {/* pt-16 for header, mb-20 for nav */}
+    <main className="min-h-screen flex flex-col pt-16 mb-20">  
       {/* Banner Slider */}
       <div className="relative">
         <div id="banner-slider" className="overflow-hidden rounded-xl mx-4 mt-2 border border-gray-100 flex items-center shadow-sm transition-all duration-300">
@@ -263,13 +263,13 @@ export default function Dashboard() {
             { value: "FY 24-25", label: "FY 24-25", dateRange: "01-04-2024 → 31-03-2025", isDefault: false },
             { value: "Today", label: "Today", dateRange: "18-06-2025 → 18-06-2025", isDefault: false },
             { value: "Yesterday", label: "Yesterday", dateRange: "17-06-2025 → 17-06-2025", isDefault: false },
-            { value: "This Week", label: "This Week", dateRange: "16-06-2025 → 22-06-2025", isDefault: false }, // Updated for current date
-            { value: "Last Week", label: "Last Week", dateRange: "09-06-2025 → 15-06-2025", isDefault: false }, // Updated for current date
-            { value: "This Month", label: "This Month", dateRange: "01-06-2025 → 30-06-2025", isDefault: false }, // Updated for current date
-            { value: "Last Month", label: "Last Month", dateRange: "01-05-2025 → 31-05-2025", isDefault: false }, // Updated for current date
-            { value: "This Year", label: "This Year", dateRange: "01-01-2025 → 31-12-2025", isDefault: true }, // Set as default for today's year
+            { value: "This Week", label: "This Week", dateRange: "16-06-2025 → 22-06-2025", isDefault: false },  
+            { value: "Last Week", label: "Last Week", dateRange: "09-06-2025 → 15-06-2025", isDefault: false },  
+            { value: "This Month", label: "This Month", dateRange: "01-06-2025 → 30-06-2025", isDefault: false },  
+            { value: "Last Month", label: "Last Month", dateRange: "01-05-2025 → 31-05-2025", isDefault: false },  
+            { value: "This Year", label: "This Year", dateRange: "01-01-2025 → 31-12-2025", isDefault: true },  
             { value: "Last Year", label: "Last Year", dateRange: "01-01-2024 → 31-12-2024", isDefault: false },
-            { value: "Last Quarter", label: "Last Quarter", dateRange: "01-03-2025 → 31-05-2025", isDefault: false }, // Updated for current quarter
+            { value: "Last Quarter", label: "Last Quarter", dateRange: "01-03-2025 → 31-05-2025", isDefault: false },  
             { value: "Custom", label: "Custom", dateRange: "01-01-2025 → 31-12-2025", isDefault: false },
           ].map((filter) => (
             <label key={filter.value} className="flex flex-col py-2 px-5 cursor-pointer">

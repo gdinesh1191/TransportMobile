@@ -1,9 +1,8 @@
-"use client"; // Keep this line at the top, as you need useState
+ "use client";
 
-// import type { Metadata } from "next"; // No longer needed here
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { useState } from "react"; // Import useState for off-canvas management
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const geistSans = Geist({
@@ -16,179 +15,123 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// REMOVE THE METADATA EXPORT FROM HERE
-// export const metadata: Metadata = {
-//   title: "My Business App",
-//   description: "A business management application.",
-// };
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [showCompanyOffcanvas, setShowCompanyOffcanvas] = useState(false);
-const route=useRouter()
-  const toggleCompanyOffcanvas = () => {
-    setShowCompanyOffcanvas(!showCompanyOffcanvas);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [pageTitle, setPageTitle] = useState("Home"); // Default title
+  const route = useRouter();
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
+
+  const menuItems = [
+    { label: "Home", icon: "ri-home-5-line", path: "/" },
+    { label: "Approval", icon: "ri-check-double-line", path: "/approval/list" },
+    { label: "Vehicle", icon: "ri-truck-line", path: "/vehicle/list" },
+    { label: "Expense", icon: "ri-wallet-3-line", path: "/expense/new" },
+    { label: "Cashbook", icon: "ri-cash-line", path: "/cashbook" },
+    { label: "Trip", icon: "ri-road-map-line", path: "/" },
+  ];
 
   return (
     <html lang="en">
       <head>
-         <link
+        <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
           rel="stylesheet"
         />
-
         <link
           href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
           rel="stylesheet"
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
       >
-        {/* Common Header */}
-        <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 h-14 flex items-center justify-between px-4 z-20 shadow-sm">
-          <div className="flex items-center">
+        {/* Header */}
+        <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 h-14 flex items-center justify-between px-4 z-40 shadow-sm">
+          <div className="flex items-center gap-3">
+            {/* Hamburger */}
+            <button
+              onClick={toggleSidebar}
+              className="text-gray-700 hover:text-gray-900 focus:outline-none"
+            >
+              <i className="ri-menu-line text-2xl"></i>
+            </button>
+            {/* Dynamic Title */}
             <span className="text-xl font-bold text-gray-800">
-             Transport App
+              {pageTitle}
             </span>
           </div>
-          <button
-            onClick={toggleCompanyOffcanvas}
-            className="flex items-center text-gray-700"
-          >
-            <span className="text-sm font-semibold">Sanjith</span>
-            <i className="ri-arrow-down-s-line text-lg ml-1"></i>
+          <button className="flex items-center text-gray-700 hover:text-gray-900">
+            <i className="ri-notification-3-line text-lg ml-1"></i>
           </button>
         </header>
 
-        {children}
+        {/* Sidebar Overlay */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 z-30 transition-opacity duration-300"
+            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+            onClick={toggleSidebar}
+          ></div>
+        )}
 
-        {/* Common Navigation Bar */}
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16 shadow-lg z-10">
-          <a onClick={()=>route.push("/")} className="flex flex-col items-center text-black">
-            <i className="ri-home-5-line text-xl mb-1"></i>
-            <span className="text-xs">Home</span>
-          </a>
-          <a
-          onClick={()=>route.push("/approval/list")}
-            
-            className="flex flex-col items-center text-black"
-          >
-            <i className="ri-user-line text-xl mb-1"></i>
-            <span className="text-xs">Approval</span>
-          </a>
-          <a onClick={()=>route.push("/vehicle/list")}
-            className="flex flex-col items-center text-black"
-          >
-            <i className="ri-truck-line text-xl mb-1"></i>
-            <span className="text-xs">Vehicle</span>
-          </a>
-          <a onClick={()=>route.push("/expense/new")}
-            className="flex flex-col items-center text-black"
-          >
-            <i className="ri-team-line text-xl mb-1"></i>
-            <span className="text-xs">Expense</span>
-          </a>
-          <a
-           onClick={()=>route.push("/")}
-            className="flex flex-col items-center text-black"
-          >
-            <i className="ri-apps-2-line text-xl mb-1"></i>
-            <span className="text-xs">Trip</span>
-          </a>
-        </nav>
-
-         
-        <div
-          className={`fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300 ${
-            showCompanyOffcanvas ? "opacity-100 visible" : "opacity-0 hidden"
+        {/* Sidebar */}
+        <aside
+          className={`fixed top-0 left-0 h-full w-64 bg-white shadow-xl rounded-r-2xl z-40 transform transition-transform duration-300 ease-in-out flex flex-col ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
-          onClick={toggleCompanyOffcanvas}
-        ></div>
-        <div
-          className={`fixed bottom-0 left-0 right-0 bg-white custom-rounded-t z-40 h-[90vh] shadow-lg flex flex-col transition-transform duration-300 offcanvas-bg ${
-            showCompanyOffcanvas ? "translate-y-0" : "translate-y-full"
-          }`} 
-          id="companyOffcanvas"
         >
-          <div className="py-2 px-4 border-b-2 border-gray-200">
-            <div className="flex justify-center mb-3">
-              <div className="w-16 h-1 bg-gray-400 rounded-full mt-2 "></div>
+          {/* User Profile */}
+          <div className="flex items-center gap-3 px-4 h-26 border-b border-gray-200 bg-[#009333]/5">
+            <div className="w-10 h-10 rounded-full bg-[#009333] text-white flex items-center justify-center font-bold">
+              S
             </div>
-            <div className="flex justify-between items-center mb-1">
-              <div className="text-xl font-bold text-gray-800"> 
-                Select Business
-              </div>
+            <div>
+              <div className="font-semibold text-gray-800">Sanjith</div>
+              <div className="text-xs text-gray-500">Administrator</div>
             </div>
           </div>
-          <div className="overflow-y-auto flex-1 p-4">
-            <div className="space-y-2">
-              <div className="p-4 bg-white shadow-sm border border-gray-200 rounded-lg company-card">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-xl font-bold text-green-800">
-                    T
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-gray-800 font-semibold">Test</div>
-                    <div className="flex gap-4 mt-1 edit-share-options">
-                      <button className="text-green-600 text-md font-semibold">
-                        Edit Company
-                      </button>
-                      <button className="text-green-600 text-md font-semibold">
-                        Share
-                      </button>
-                    </div>
-                  </div>
-                  <input
-                    type="radio"
-                    name="company"
-                    value="test"
-                    className="w-5 h-5 custom-green"
-                    defaultChecked
-                    data-bg="bg-green-100"
-                    data-text="text-green-800"
-                  />
-                </div>
-              </div>
 
-              <div className="p-4 bg-white shadow-sm border border-gray-200 rounded-lg company-card">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-xl font-bold text-red-800">
-                    N
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-gray-800 font-semibold">nt</div>
-                    <div className="flex gap-4 mt-1 edit-share-options hidden">
-                      <button className="text-green-600 text-md font-semibold">
-                        Edit Company
-                      </button>
-                      <button className="text-green-600 text-md font-semibold">
-                        Share
-                      </button>
-                    </div>
-                  </div>
-                  <input
-                    type="radio"
-                    name="company"
-                    value="nt"
-                    className="w-5 h-5 custom-green"
-                    data-bg="bg-red-100"
-                    data-text="text-red-800"
-                  />
-                </div>
-              </div>
-            </div>
+          {/* Menu */}
+          <nav className="flex flex-col gap-1 mt-4 px-2">
+            {menuItems.map((item, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  setPageTitle(item.label); // 🔥 set title here
+                  route.push(item.path);
+                  toggleSidebar();
+                }}
+                className="flex items-center gap-3 text-gray-700 hover:bg-[#009333]/10 hover:text-[#009333] px-4 py-3 transition rounded-lg"
+              >
+                <i className={`${item.icon} text-xl`}></i>
+                <span className="font-medium">{item.label}</span>
+              </button>
+            ))}
+          </nav>
 
-            <button className="w-full mt-4 py-3 text-green-600 font-semibold text-xl text-center flex items-center justify-center ">
-              <i className="ri-add-line text-2xl"></i>
-              Add new Business
+          {/* Sign Out */}
+          <div className="mt-auto border-t border-gray-200 px-2 py-3">
+            <button
+              onClick={() => {
+                route.push("/logout");
+                toggleSidebar();
+              }}
+              className="w-full flex items-center gap-3 text-red-600 hover:bg-red-50 px-4 py-3 rounded-lg transition"
+            >
+              <i className="ri-logout-box-r-line text-xl"></i>
+              <span className="font-medium">Sign Out</span>
             </button>
           </div>
-        </div>
+        </aside>
+
+        <main className="pt-3 p-2">{children}</main>
       </body>
     </html>
   );
