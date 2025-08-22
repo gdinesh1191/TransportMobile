@@ -35,7 +35,8 @@ export default function TripApproval() {
   const sortOffcanvasRef = useRef<HTMLDivElement>(null);
   const filterOffcanvasRef = useRef<HTMLDivElement>(null);
   const categoryOffcanvasRef = useRef<HTMLDivElement>(null);
-
+  const filterOverlayRef = useRef<HTMLDivElement>(null);
+  const categoryOverlayRef = useRef<HTMLDivElement>(null);
   const categoryInputRef = useRef<HTMLInputElement | null>(null);
 
 
@@ -125,26 +126,72 @@ export default function TripApproval() {
       }
       return 0;
     });
-
-
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (sortOffcanvasRef.current && !sortOffcanvasRef.current.contains(event.target as Node)) {
-      setIsSortOffcanvasOpen(false);
+  const openFilterOffcanvas = useCallback(() => {
+    setPendingVehicleNumber(selectedVehicleNumber);
+    setIsFilterOffcanvasOpen(true);
+    if (filterOverlayRef.current) {
+      filterOverlayRef.current.classList.remove('hidden');
+      filterOverlayRef.current.classList.add('opacity-100');
     }
-    if (filterOffcanvasRef.current && !filterOffcanvasRef.current.contains(event.target as Node)) {
-      setIsFilterOffcanvasOpen(false);
-    }
-    if (categoryOffcanvasRef.current && !categoryOffcanvasRef.current.contains(event.target as Node)) {
-      setIsCategoryOffcanvasOpen(false);
+  }, []);
+  const closeFilterOffcanvas = useCallback(() => {
+    setIsFilterOffcanvasOpen(false);
+    if (filterOverlayRef.current) {
+      filterOverlayRef.current.classList.add('hidden');
+      filterOverlayRef.current.classList.remove('opacity-100');
     }
   }, []);
 
+  const openCategoryOffcanvas = useCallback(() => {
+    if (filterOverlayRef.current) {
+      filterOverlayRef.current.classList.add('hidden');
+    }
+    setIsCategoryOffcanvasOpen(true);
+    if (categoryOverlayRef.current) {
+      categoryOverlayRef.current.classList.remove('hidden');
+      categoryOverlayRef.current.classList.add('opacity-100');
+    }
+  }, []);
+
+  const closeCategoryOffcanvas = useCallback(() => {
+    setIsCategoryOffcanvasOpen(false);
+    setSearchVehicleTerm("");
+    if (categoryOverlayRef.current) {
+      categoryOverlayRef.current.classList.add('hidden');
+      categoryOverlayRef.current.classList.remove('opacity-100');
+    }
+    // Restore filter overlay if filter was open
+    if (isFilterOffcanvasOpen && filterOverlayRef.current) {
+      filterOverlayRef.current.classList.remove('hidden');
+      filterOverlayRef.current.classList.add('opacity-100');
+    }
+  }, [isFilterOffcanvasOpen]);
+
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Sort Off-canvas
+      if (sortOffcanvasRef.current && !sortOffcanvasRef.current.contains(event.target as Node)) {
+        setIsSortOffcanvasOpen(false);
+      }
+      // Filter Off-canvas
+      if (filterOffcanvasRef.current && !filterOffcanvasRef.current.contains(event.target as Node) && isFilterOffcanvasOpen && event.target === filterOverlayRef.current) {
+        closeFilterOffcanvas();
+      }
+      // Category Off-canvas
+      if (categoryOffcanvasRef.current && !categoryOffcanvasRef.current.contains(event.target as Node) && isCategoryOffcanvasOpen && event.target === categoryOverlayRef.current) {
+        closeCategoryOffcanvas();
+      }
+      // Vehicle Info Off-canvas
+
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [handleClickOutside]);
+  }, [isSortOffcanvasOpen, isFilterOffcanvasOpen, closeFilterOffcanvas, isCategoryOffcanvasOpen, closeCategoryOffcanvas]);
+
+
 
   // Handlers for Approve/Reject
   const handleAction = async (id: string, status: number) => {
@@ -167,7 +214,7 @@ export default function TripApproval() {
           type: "success",
         });
 
-         setTrips((prev) => prev.filter((trip) => trip.id !== id));
+        setTrips((prev) => prev.filter((trip) => trip.id !== id));
       } else {
         showToast({
           title: "Action failed",
@@ -204,10 +251,7 @@ export default function TripApproval() {
           <button
             id="openFilterBtn"
             className="text-gray-700 text-sm flex items-center gap-1"
-            onClick={() => {
-              setPendingVehicleNumber(selectedVehicleNumber);
-              setIsFilterOffcanvasOpen(true);
-            }}
+            onClick={openFilterOffcanvas}
           >
             <i className="ri-filter-2-line"></i>
             <span className="text-sm font-semibold">Filter</span>
@@ -329,16 +373,12 @@ export default function TripApproval() {
 
       {/* --- Filter Overlay --- */}
       <div
-        id="filterOverlay"
-        className={`fixed inset-0 z-40 bg-[rgba(0,0,0,0.5)] transition-opacity duration-300 ${isFilterOffcanvasOpen || isCategoryOffcanvasOpen
-          ? "opacity-100"
-          : "opacity-0 pointer-events-none"
-          }`}
-        onClick={() => {
-          setIsFilterOffcanvasOpen(false);
-          setIsCategoryOffcanvasOpen(false);
-        }}
+        ref={filterOverlayRef}
+        className={`fixed inset-0 z-40 bg-[rgba(0,0,0,0.5)] ${isFilterOffcanvasOpen ? 'opacity-100' : 'opacity-0 hidden'} transition-opacity duration-300`}
+        onClick={closeFilterOffcanvas} // Click on overlay to close filter
       ></div>
+
+
 
       {/* --- Filter Off-canvas --- */}
       <div
@@ -356,7 +396,7 @@ export default function TripApproval() {
             <button
               id="close-Filter"
               className="text-gray-500"
-              onClick={() => setIsFilterOffcanvasOpen(false)}
+              onClick={closeFilterOffcanvas}
             >
               <i className="ri-close-line text-2xl"></i>
             </button>
@@ -371,7 +411,7 @@ export default function TripApproval() {
             <div
               className="relative cursor-pointer"
               id="categoryTrigger"
-              onClick={() => setIsCategoryOffcanvasOpen(true)}
+              onClick={openCategoryOffcanvas}
             >
               <input
                 type="text"
@@ -393,7 +433,7 @@ export default function TripApproval() {
             className="text-gray-800 font-semibold"
             onClick={() => {
               setPendingVehicleNumber(null);
-
+              closeFilterOffcanvas();
             }}
           >
             Clear
@@ -402,7 +442,7 @@ export default function TripApproval() {
             className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg"
             onClick={() => {
               setSelectedVehicleNumber(pendingVehicleNumber);
-              setIsFilterOffcanvasOpen(false);
+              closeFilterOffcanvas();
             }}
           >
             Apply
@@ -410,11 +450,15 @@ export default function TripApproval() {
         </div>
       </div>
 
+
+      <div
+        ref={categoryOverlayRef}
+        className={`fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-50 z-50 ${isCategoryOffcanvasOpen ? 'opacity-100' : 'opacity-0 hidden'} transition-opacity duration-300`}
+        onClick={closeCategoryOffcanvas}
+      ></div>
       {/* --- Category Off-canvas (Vehicle Number Selection) --- */}
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white custom-rounded-t z-60 shadow-lg flex flex-col transform transition-transform duration-200 ${isCategoryOffcanvasOpen ? "translate-y-0" : "translate-y-full"
-          }`}
-        id="categoryOffcanvas"
+        className={`fixed bottom-0 left-0 right-0 bg-white custom-rounded-t z-60 shadow-lg flex flex-col transform ${isCategoryOffcanvasOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-200`}
         ref={categoryOffcanvasRef}
       >
         <div className="py-2 px-5 border-b-2 border-gray-200">
@@ -426,7 +470,7 @@ export default function TripApproval() {
             <button
               id="closecategoryBtn"
               className="text-gray-500"
-              onClick={() => setIsCategoryOffcanvasOpen(false)}
+              onClick={closeCategoryOffcanvas}
             >
               <i className="ri-close-line text-2xl"></i>
             </button>
@@ -464,8 +508,7 @@ export default function TripApproval() {
                     }`}
                   onClick={() => {
                     setPendingVehicleNumber(number);
-                    setIsCategoryOffcanvasOpen(false);
-                    setIsFilterOffcanvasOpen(true);
+                    closeCategoryOffcanvas();
                   }}
                 >
                   <span>{number}</span>

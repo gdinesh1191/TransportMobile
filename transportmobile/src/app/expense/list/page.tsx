@@ -31,6 +31,7 @@ export default function ExpenseList() {
   const [hideZeroQuantity, setHideZeroQuantity] = useState(false);
   const [showLowStock, setShowLowStock] = useState(false);
   const [expenseCategory, setExpenseCategory] = useState("");
+  const [pendingExpenseCategory, setPendingExpenseCategory] = useState("");
   const [isCategoryOffcanvasOpen, setIsCategoryOffcanvasOpen] = useState(false);
   const [categorySearchQuery, setCategorySearchQuery] = useState("");
 
@@ -104,7 +105,7 @@ export default function ExpenseList() {
   }, [isFilterOffcanvasOpen]);
 
   const handleCategorySelect = (category: string) => {
-    setExpenseCategory(category);
+    setPendingExpenseCategory(category);
     closeCategoryOffcanvas();
   }
 
@@ -135,10 +136,7 @@ export default function ExpenseList() {
     };
   }, [isSortOffcanvasOpen, isFilterOffcanvasOpen, closeFilterOffcanvas, isCategoryOffcanvasOpen, closeCategoryOffcanvas]);
 
-  const handleFilterSubmit = () => {
-    fetchExpense();
-    closeFilterOffcanvas();
-  }
+  
 
   const fetchExpense = async () => {
     try {
@@ -146,13 +144,6 @@ export default function ExpenseList() {
 
       const payload = {
         token: "getTripExpense",
-        data: {
-
-          filters: {
-            expenseCategory: expenseCategory || "",
-
-          },
-        },
       };
 
       const response = await postData<any>(payload);
@@ -174,8 +165,16 @@ export default function ExpenseList() {
       console.log(error);
     }
   };
-
-
+  const filteredExpenseList = expenseList.filter((expense) =>
+    expense.expenseCategory.toLowerCase().includes(expenseCategory.toLowerCase())
+  );
+  const sortedAndFilteredExpenseList = filteredExpenseList
+  .filter((expense) => {
+    if (expenseCategory && expense.expenseCategory !== expenseCategory) {
+      return false;
+    }
+    return true;
+  })
   return (
     <>
       <header className="fixed top-0 left-0 right-0 w-full z-20 flex items-center justify-between px-4 bg-white border-b border-gray-200 shadow-sm h-14">
@@ -233,8 +232,8 @@ export default function ExpenseList() {
         <div className="mt-2 mx-4 flex flex-col">
           {/* Product List */}
           <div className="product-list overflow-y-auto space-y-2">
-            {expenseList.length > 0 ? (
-              expenseList.map((expense) => (
+            {sortedAndFilteredExpenseList.length > 0 ? (
+              sortedAndFilteredExpenseList.map((expense) => (
                 <div
                   key={expense.id}
                   className="relative bg-white py-5 px-3 rounded-lg"
@@ -463,7 +462,7 @@ export default function ExpenseList() {
                   name="category"
                   className={`form-control pr-10 w-full expense `}
                   placeholder="Select Category"
-                  value={expenseCategory}
+                  value={pendingExpenseCategory}
                   readOnly
                 />
                 <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
@@ -478,7 +477,10 @@ export default function ExpenseList() {
               closeFilterOffcanvas();
               setExpenseCategory("");
             }}>Cancel</button>
-            <button className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg" onClick={()=>{handleFilterSubmit(); setExpenseCategory("")}}>Submit</button>
+            <button className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg" onClick={()=>{
+              setExpenseCategory(pendingExpenseCategory);
+              closeFilterOffcanvas();
+            }}>Submit</button>
           </div>
         </div>
 

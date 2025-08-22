@@ -35,6 +35,7 @@ export default function VehicleSearch() {
   const [isVehicleInfoCanvasOpen, setIsVehicleInfoCanvasOpen] = useState(false);
   const [selectedSortOption, setSelectedSortOption] = useState("Default");
   const [selectedVehicleNumber, setSelectedVehicleNumber] = useState("");
+  const [pendingVehicleNumber, setPendingVehicleNumber] = useState("");
   const [vehicleInfoDetails, setVehicleInfoDetails] = useState({
     number: "",
     type: "",
@@ -137,7 +138,7 @@ export default function VehicleSearch() {
 
   // Handle vehicle number selection in category off-canvas
   const handleVehicleNumberSelect = useCallback((number: string) => {
-    setSelectedVehicleNumber(number);
+    setPendingVehicleNumber(number);
     closeCategoryOffcanvas();
   }, [closeCategoryOffcanvas]);
 
@@ -204,10 +205,16 @@ export default function VehicleSearch() {
     }
   };
 
-  const handleFilterSubmit = () => {
-    fetchVehicle();
-    closeFilterOffcanvas();
-  }
+  const filteredVehicleList = vehicle.filter((vehicle) =>
+    vehicle.registrationNumber.toLowerCase().includes(searchVehicleInput.toLowerCase())
+  );
+  const sortedAndFilteredVehicleList = filteredVehicleList
+  .filter((vehicle) => {
+    if (selectedVehicleNumber && vehicle.registrationNumber !== selectedVehicleNumber) {
+      return false;
+    }
+    return true;
+  })
 
   return (
     <main>
@@ -250,13 +257,13 @@ export default function VehicleSearch() {
 
         <div className="h-autoflex-1">
           <div className="mt-2 mx-1 flex flex-col">
-            {vehicle.length > 0 ? (
+            {sortedAndFilteredVehicleList.length > 0 ? (
               <div
                 className="product-list space-y-2 bg-white p-4 rounded-lg shadow max-h-[calc(100vh-130px)]"
                 style={{ overflowY: "scroll", scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {/* This is a static example of a vehicle card. In a real app, you'd map over an array of vehicles. */}
-                {vehicle.map((vehicle) => (
+                {sortedAndFilteredVehicleList.map((vehicle) => (
                   <div className="flex items-center justify-between text-sm w-full" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }} key={vehicle.id}>
                     {/* Vehicle Icon + Info */}
                     <div className="flex items-center gap-3">
@@ -359,7 +366,7 @@ export default function VehicleSearch() {
               <input
                 type="text"
                 className="form-control pr-10 w-full expense"
-                value={selectedVehicleNumber}
+                value={pendingVehicleNumber}
                 placeholder="Select Vehicle Number"
                 readOnly
               />
@@ -372,7 +379,7 @@ export default function VehicleSearch() {
         {/* Buttons */}
         <div className="flex justify-between px-6 py-3 border-t-[1px] border-gray-200 text-lg ">
           <button className="text-gray-800 font-semibold" onClick={() => { closeFilterOffcanvas(); setSelectedVehicleNumber("") }}>Cancel</button>
-          <button className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg" onClick={() => { handleFilterSubmit(); setSelectedVehicleNumber("") }}>Submit</button>
+          <button className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg" onClick={() => { closeFilterOffcanvas(); setSelectedVehicleNumber(pendingVehicleNumber) }}>Submit</button>
         </div>
       </div>
 
