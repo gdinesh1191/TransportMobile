@@ -42,7 +42,7 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen flex flex-col pt-16 mb-20">  
-      {/* Banner Slider */}
+      {/* Banner Slider
       <div className="relative">
         <div id="banner-slider" className="overflow-hidden rounded-xl mx-4 mt-2 border border-gray-100 flex items-center shadow-sm transition-all duration-300">
           <div
@@ -99,7 +99,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Status Card */}
+       
       <div className="bg-white rounded-xl mx-4 mt-4 p-4 shadow-sm border border-gray-100">
         <div className="flex justify-between items-center mb-3">
           <div className="flex items-center cursor-pointer" onClick={toggleDateFilter} id="dateFilterTrigger">
@@ -128,7 +128,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Create Section */}
+    
       <div className="mx-4 mt-4">
         <div className="flex items-center mb-2">
           <span className="font-semibold text-gray-800 text-lg">Create</span>
@@ -171,7 +171,7 @@ export default function Dashboard() {
               <span className="text-xs text-gray-700">Purchase Order</span>
             </div>
           </a>
-          <a > {/* Corrected path */}
+          <a >  
             <div className="flex flex-col items-center text-center">
               <i className="ri ri-money-dollar-circle-line mb-1 icon-neutral icon-sm"></i>
               <span className="text-xs text-gray-700">Expenses</span>
@@ -186,7 +186,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Quick Access */}
+       
       <div className="mx-4 mt-4 mb-2">
         <div className="font-semibold text-gray-800 text-lg mb-2">Quick Access</div>
         <div className="grid grid-cols-4 gap-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100">
@@ -237,7 +237,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Date Filter Off-canvas */}
+     
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300 ${
           showDateFilter ? "opacity-100 visible" : "opacity-0 hidden"
@@ -308,14 +308,14 @@ export default function Dashboard() {
           <button
             className="w-full bg-green-600 text-white py-3 mb-2 rounded-lg font-semibold text-center transition"
             id="applyFilter"
-            onClick={toggleDateFilter} // Close off-canvas on apply
+            onClick={toggleDateFilter} 
           >
             APPLY
           </button>
         </div>
       </div>
 
-      {/* View Bills Off-canvas */}
+     
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300 ${
           showBillsOffcanvas ? "opacity-100 visible" : "opacity-0 hidden"
@@ -404,7 +404,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -2,8 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import RootLayout from "../../layout";
-// Define a type for trip data
-interface Trip {
+ interface Trip {
   id: string;
   vehicleNumber: string;
   fromPlace: string;
@@ -13,8 +12,7 @@ interface Trip {
   quantity: string;
 }
 
-// Dummy data for trips - replace with actual data fetching
-const DUMMY_TRIPS: Trip[] = [
+ const DUMMY_TRIPS: Trip[] = [
   {
     id: "1",
     vehicleNumber: "TN38NK3456",
@@ -62,8 +60,7 @@ const DUMMY_TRIPS: Trip[] = [
   },
 ];
 
-// Dummy data for vehicle numbers - replace with actual data fetching
-const DUMMY_VEHICLE_NUMBERS: string[] = [
+ const DUMMY_VEHICLE_NUMBERS: string[] = [
   "MH 12 AB 1234",
   "MH 14 XY 5678",
   "DL 01 ZZ 4321",

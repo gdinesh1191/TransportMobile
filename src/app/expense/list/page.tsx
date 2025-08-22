@@ -2,8 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
-// Define a type for the form data
-interface Product {
+ interface Product {
   id: string;
   name: string;
   category: string;
@@ -25,7 +24,7 @@ const productData: Product[] = [
     discount: 25.0,
     imageUrl: "/images/shoppingBag.PNG",
   },
-  // Add more product data as needed for demonstration
+  
   {
     id: "2",
     name: "Wireless Mouse",
@@ -50,7 +49,7 @@ const productData: Product[] = [
     id: "4",
     name: "USB-C Hub",
     category: "Accessories",
-    quantity: 0, // Example of zero quantity
+    quantity: 0, 
     unit: "PCS",
     price: 1200.0,
     discount: 5.0,
@@ -125,7 +124,7 @@ export default function ProductsAndServices() {
       if (hideZeroQuantity && product.quantity === 0) {
         return false;
       }
-      // Assuming "low stock" could be defined as quantity <= 50 for this example
+      
       if (showLowStock && product.quantity > 50) {
         return false;
       }
@@ -161,7 +160,7 @@ export default function ProductsAndServices() {
       </header>
 
       <main className="min-h-screen flex flex-col pt-16 bg-gray-50">
-        {/* Search, Sort, Filter */}
+       
         <div className="flex items-center justify-between px-4 m-1">
           <div
             className="flex items-center gap-4 cursor-pointer"
@@ -238,7 +237,7 @@ export default function ProductsAndServices() {
               </div>
             )}
           </div>
-          {/* New Product Button */}
+        
           <a
             
             className="m-2 bg-green-600 transition text-white font-semibold rounded-full shadow w-auto px-4 py-2 ml-auto flex items-center gap-1"
@@ -247,7 +246,7 @@ export default function ProductsAndServices() {
           </a>
         </div>
 
-        {/* Sort Off-canvas */}
+        
         <div
           id="sort-offcanvas"
           className={`fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-30 ${
@@ -328,7 +327,7 @@ export default function ProductsAndServices() {
           </div>
         </div>
 
-        {/* More Off-canvas */}
+       
         <div
           id="more-offcanvas"
           className={`fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-30 ${
@@ -359,8 +358,7 @@ export default function ProductsAndServices() {
           </div>
         </div>
 
-        {/* Filter Off-canvas */}
-        <div
+         <div
           id="Filter-offcanvas"
           className={`fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-30 ${
             isFilterOffcanvasOpen ? "" : "hidden"
@@ -424,7 +422,7 @@ export default function ProductsAndServices() {
               </button>
               <button
                 className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg"
-                onClick={() => setIsFilterOffcanvasOpen(false)} // Apply filter logic here
+                onClick={() => setIsFilterOffcanvasOpen(false)} 
               >
                 Submit
               </button>
@@ -433,10 +431,7 @@ export default function ProductsAndServices() {
         </div>
       </main>
 
-      {/* No direct equivalent for PHP includes like header.php and footer.php in a single TSX file.
-          In a full Next.js/React application, these would typically be separate components
-          imported and used as <Header /> and <Footer /> within your layout or page components.
-      */}
+      
       <style jsx>{`
         .product-list {
           height: auto;
