@@ -127,7 +127,6 @@ export default function TripApproval() {
       return 0;
     });
   const openFilterOffcanvas = useCallback(() => {
-    setPendingVehicleNumber(selectedVehicleNumber);
     setIsFilterOffcanvasOpen(true);
     if (filterOverlayRef.current) {
       filterOverlayRef.current.classList.remove('hidden');
@@ -155,7 +154,6 @@ export default function TripApproval() {
 
   const closeCategoryOffcanvas = useCallback(() => {
     setIsCategoryOffcanvasOpen(false);
-    setSearchVehicleTerm("");
     if (categoryOverlayRef.current) {
       categoryOverlayRef.current.classList.add('hidden');
       categoryOverlayRef.current.classList.remove('opacity-100');
