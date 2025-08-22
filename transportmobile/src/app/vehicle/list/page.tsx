@@ -1,11 +1,12 @@
- "use client";
+"use client";
 
+import { postData } from "@/app/utils/api";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect, useCallback } from "react";
 // Assuming you have a Layout component at "../../layout"
 // import Layout from "../../layout";
 
- interface Trip {
+interface Trip {
   id: string;
   vehicleNumber: string;
   fromPlace: string;
@@ -13,6 +14,18 @@ import { useState, useRef, useEffect, useCallback } from "react";
   date: string;
   product: string;
   quantity: string;
+}
+
+interface Vehicle {
+  id: number;
+  registrationNumber: string;
+  ownerName: string;
+  modelYear: string;
+  chasisNumber: string;
+  npExpiryDate: string;
+  truckType: string;
+  classOfTruck: string;
+  truckStatus: string;
 }
 
 export default function VehicleSearch() {
@@ -26,14 +39,17 @@ export default function VehicleSearch() {
     number: "",
     type: "",
     year: "",
-    chassis: "MA1TA2ABCD1234567", // Example static data
-    engine: "ENG456789XYZ", // Example static data
-    owner: "Ravi Kumar", // Example static data
-    regDate: "2021-08-15", // Example static data
-    fuel: "Diesel", // Example static data
-    vehicleClass: "Heavy Motor Vehicle", // Example static data
+    chassis: "",
+    engine: "",
+    owner: "",
+    regDate: "",
+    vehicleWeight: "",
+    vehicleClass: "",
   });
-const route=useRouter()
+  const [searchVehicleInput, setSearchVehicleInput] = useState("");
+  const [vehicle, setVehicle] = useState<Vehicle[]>([]);
+
+  const route = useRouter()
 
   // Refs for off-canvas elements to manage their visibility directly if needed,
   // though state-based rendering is generally preferred in React.
@@ -55,9 +71,8 @@ const route=useRouter()
   ];
 
   // Search input for vehicle numbers
-  const [searchVehicleInput, setSearchVehicleInput] = useState("");
-  const filteredVehicleNumbers = vehicleNumbers.filter(number =>
-    number.toLowerCase().includes(searchVehicleInput.toLowerCase())
+  const filteredVehicleNumbers = vehicle.filter((vehicle) =>
+    vehicle.registrationNumber.toLowerCase().includes(searchVehicleInput.toLowerCase())
   );
 
   // Handlers for opening/closing off-canvases
@@ -106,10 +121,11 @@ const route=useRouter()
   }, [isFilterOffcanvasOpen]);
 
 
-  const openVehicleInfoCanvas = useCallback((number: string, type: string, year: string) => {
-    setVehicleInfoDetails({ ...vehicleInfoDetails, number, type, year });
+  const openVehicleInfoCanvas = useCallback((vehicle: any) => {
+    setVehicleInfoDetails({ ...vehicleInfoDetails, number: vehicle.registrationNumber, type: vehicle.truckType, year: vehicle.modelYear, chassis: vehicle.chasisNumber, engine: vehicle.engineNumber, owner: vehicle.ownerName, regDate: vehicle.registrationDate, vehicleWeight: vehicle.vehicleWeight, vehicleClass: vehicle.classOfTruck });
+    console.log(vehicleInfoDetails);
     setIsVehicleInfoCanvasOpen(true);
-  }, [vehicleInfoDetails]);
+  }, [vehicleInfoDetails, vehicle]);
 
   const closeVehicleInfoCanvas = useCallback(() => setIsVehicleInfoCanvasOpen(false), []);
 
@@ -152,9 +168,49 @@ const route=useRouter()
     };
   }, [isSortOffcanvasOpen, closeSortOffcanvas, isFilterOffcanvasOpen, closeFilterOffcanvas, isCategoryOffcanvasOpen, closeCategoryOffcanvas, isVehicleInfoCanvasOpen, closeVehicleInfoCanvas]);
 
+  useEffect(() => {
+    fetchVehicle();
+  }, []);
+
+  const fetchVehicle = async () => {
+    try {
+      const payload = {
+        token: "getVehicle",
+        data: {
+
+          filters: {
+            registrationNumber: selectedVehicleNumber,
+
+          },
+        },
+      };
+
+      const response = await postData<any>(payload);
+
+      if (response.status === 'success') {
+        const fetchedData = response?.vehicles ?? [];
+
+        if (Array.isArray(fetchedData) && fetchedData.length > 0) {
+          setVehicle(fetchedData);
+        } else {
+          setVehicle([]);
+        }
+      }
+      else {
+        setVehicle([]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleFilterSubmit = () => {
+    fetchVehicle();
+    closeFilterOffcanvas();
+  }
 
   return (
-     <main>
+    <main>
       <header
         className="fixed top-0 left-0 right-0 w-full z-20 flex items-center justify-between px-4 bg-white border-b border-gray-200 shadow-sm h-14"
       >
@@ -174,10 +230,10 @@ const route=useRouter()
         </div>
       </header>
 
-      <div className="min-h-screen flex flex-col pt-16 bg-[#f3f3f3]">
+      <div className="max-h-screen flex flex-col pt-16">
         {/* Search, Sort, Filter */}
-        <div className="flex items-center justify-between px-4 m-1">
-          <div className="flex items-center gap-4 cursor-pointer" onClick={openSortOffcanvas}>
+        <div className="flex items-center justify-between px-1 m-1">
+          <div className="flex items-center gap-4 cursor-pointer" >
             <span className="text-gray-500 text-sm font-medium">Sort</span>
             <span id="sort-text" className="text-gray-800 text-sm font-semibold focus:outline-none">
               {selectedSortOption}
@@ -193,378 +249,43 @@ const route=useRouter()
         </div>
 
         <div className="h-autoflex-1">
-          <div className="mt-2 mx-4 flex flex-col">
-            <div
-              className="product-list space-y-2 bg-white p-4 rounded-lg shadow"
-              style={{ maxHeight: "calc(80vh - 0px)", overflowY: "scroll", scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              {/* This is a static example of a vehicle card. In a real app, you'd map over an array of vehicles. */}
-              <div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
+          <div className="mt-2 mx-1 flex flex-col">
+            {vehicle.length > 0 ? (
+              <div
+                className="product-list space-y-2 bg-white p-4 rounded-lg shadow max-h-[calc(100vh-130px)]"
+                style={{ overflowY: "scroll", scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {/* This is a static example of a vehicle card. In a real app, you'd map over an array of vehicles. */}
+                {vehicle.map((vehicle) => (
+                  <div className="flex items-center justify-between text-sm w-full" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }} key={vehicle.id}>
+                    {/* Vehicle Icon + Info */}
+                    <div className="flex items-center gap-3">
+                      {/* Vehicle Icon */}
+                      <i className="ri-truck-line text-xl text-green-600"></i>
 
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
+                      {/* Truck Info */}
+                      <div className="flex flex-col">
+                        <span className="font-medium text-gray-800">{vehicle.registrationNumber}</span>
+                        <span className="text-gray-500">{vehicle.truckType} - Truck · {vehicle.modelYear}</span>
+                      </div>
+                    </div>
+
+                    {/* Eye Icon */}
+                    <i
+                      className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
+                      onClick={() => openVehicleInfoCanvas(vehicle)}
+                    ></i>
                   </div>
-                </div>
+                ))}
 
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
+                {/* More static vehicle entries would go here, or dynamic rendering via map() */}
               </div>
-              <div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <h1 className="text-gray-500">No vehicle found</h1>
               </div>
-              <div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
+            )}
 
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div>
-              <div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div><div className="flex items-center justify-between text-sm" style={{ borderBottom: "1px solid #c2c2c2", paddingBottom: "15px" }}>
-                {/* Vehicle Icon + Info */}
-                <div className="flex items-center gap-3">
-                  {/* Vehicle Icon */}
-                  <i className="ri-truck-line text-xl text-green-600"></i>
-
-                  {/* Truck Info */}
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-800">TN 58 AB 1234</span>
-                    <span className="text-gray-500">16 W - Truck · 2021</span>
-                  </div>
-                </div>
-
-                {/* Eye Icon */}
-                <i
-                  className="ri-information-line text-lg text-blue-600 cursor-pointer hover:text-blue-800"
-                  onClick={() => openVehicleInfoCanvas("TN 58 AB 1234", "16 W - Truck", "2021")}
-                ></i>
-              </div>
-              {/* More static vehicle entries would go here, or dynamic rendering via map() */}
-            </div>
           </div>
         </div>
       </div>
@@ -617,7 +338,7 @@ const route=useRouter()
       {/* Filter Off-canvas */}
       <div
         ref={filterOffcanvasRef}
-        className={`fixed bottom-0 w-full max-w-md bg-white rounded-t-2xl shadow-lg z-50 transform ${isFilterOffcanvasOpen ? 'translate-y-0' : 'translate-y-full hidden'}`}
+        className={`fixed bottom-0 left-0 right-0 w-full max-w-md bg-white rounded-t-2xl shadow-lg z-50 transform ${isFilterOffcanvasOpen ? 'translate-y-0' : 'translate-y-full hidden'}`}
       >
         <div className="py-2 px-5 border-b-2 border-gray-200">
           <div className="flex justify-center mb-3">
@@ -637,7 +358,7 @@ const route=useRouter()
             <div className="relative cursor-pointer" onClick={openCategoryOffcanvas}>
               <input
                 type="text"
-                className="form-input pr-10 w-full expense"
+                className="form-control pr-10 w-full expense"
                 value={selectedVehicleNumber}
                 placeholder="Select Vehicle Number"
                 readOnly
@@ -650,8 +371,8 @@ const route=useRouter()
         </div>
         {/* Buttons */}
         <div className="flex justify-between px-6 py-3 border-t-[1px] border-gray-200 text-lg ">
-          <button className="text-gray-800 font-semibold" onClick={closeFilterOffcanvas}>Cancel</button>
-          <button className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg">Submit</button>
+          <button className="text-gray-800 font-semibold" onClick={() => { closeFilterOffcanvas(); setSelectedVehicleNumber("") }}>Cancel</button>
+          <button className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg" onClick={() => { handleFilterSubmit(); setSelectedVehicleNumber("") }}>Submit</button>
         </div>
       </div>
 
@@ -680,27 +401,26 @@ const route=useRouter()
         </div>
         <div className="flex-1 p-4">
           <div className="mb-2 relative">
+            <i className="ri-search-line absolute inset-y-0 left-3 flex items-center text-gray-400 text-lg pointer-events-none"></i>
             <input
               type="text"
               id="unitSearchInput"
-              className="form-input w-full search-input pr-4 py-2 border border-gray-300 rounded-lg "
+              className="form-control w-full search-input pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-green-500 focus:border-green-500"
               placeholder="Search Vehicle number"
               value={searchVehicleInput}
               onChange={(e) => setSearchVehicleInput(e.target.value)}
             />
-            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-              <i className="ri-search-line text-gray-400 text-lg"></i>
-            </div>
+
           </div>
 
           <div className="h-80 overflow-y-auto">
-            {filteredVehicleNumbers.map((number, index) => (
+            {filteredVehicleNumbers.map((vehicle, index) => (
               <div
                 key={index}
                 className="p-2 flex items-center cursor-pointer hover:bg-gray-100"
-                onClick={() => handleVehicleNumberSelect(number)}
+                onClick={() => handleVehicleNumberSelect(vehicle.registrationNumber)}
               >
-                <span>{number}</span>
+                <span>{vehicle.registrationNumber}</span>
               </div>
             ))}
           </div>
@@ -708,26 +428,26 @@ const route=useRouter()
       </div>
 
       {/* Vehicle Info Off-canvas */}
-    
-      {/* <div
+
+      <div
         ref={vehicleInfoCanvasRef}
         className={`fixed inset-0 z-50 flex items-end justify-center bg-[rgba(0,0,0,0.5)] ${isVehicleInfoCanvasOpen ? "" : "hidden"}`}
         onClick={(e) => { if (e.target === vehicleInfoCanvasRef.current) closeVehicleInfoCanvas(); }}
       >
         <div className="w-full max-w-md bg-white rounded-t-2xl shadow-lg flex flex-col relative font-[14px]">
-           
+
           <button onClick={closeVehicleInfoCanvas} className="absolute top-3 right-3 text-gray-500 hover:text-red-500 transition-colors">
             <i className="ri-close-line text-2xl"></i>
           </button>
 
-          
+
           <div className="px-4 py-4 border-b border-gray-200 text-center">
             <h3 className="text-lg font-semibold text-gray-800">Vehicle Details</h3>
           </div>
 
-          
+
           <div className="p-4 space-y-3 text-gray-700 flex-1">
-            
+
             <div className="flex justify-between">
               <span className="font-medium">Vehicle Number:</span>
               <span id="vehicleNumber" className="text-[#009333]">{vehicleInfoDetails.number}</span>
@@ -757,16 +477,16 @@ const route=useRouter()
               <span id="vehicleRegDate">{vehicleInfoDetails.regDate}</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium">Fuel Type:</span>
-              <span id="vehicleFuel">{vehicleInfoDetails.fuel}</span>
+              <span className="font-medium">Vehicle Weight in Kg:</span>
+              <span id="vehicleWeight">{vehicleInfoDetails.vehicleWeight}</span>
             </div>
             <div className="flex justify-between">
               <span className="font-medium">Vehicle Class:</span>
               <span id="vehicleClass">{vehicleInfoDetails.vehicleClass}</span>
             </div>
 
-           
-            <div className="grid grid-cols-2 gap-3 mt-5">
+
+            {/* <div className="grid grid-cols-2 gap-3 mt-5">
               <button className="bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-300 py-2 rounded-xl text-sm flex items-center justify-center gap-2">
                 <i className="ri-file-download-line"></i> RC
               </button>
@@ -796,10 +516,10 @@ const route=useRouter()
                 className="flex-1 text-center bg-[#c2c2c2] text-black hover:bg-[#007a29] transition-colors font-medium py-2 rounded-xl">
                 Trip History
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
-      </div> */}
+      </div>
 
     </main>
     // </Layout>

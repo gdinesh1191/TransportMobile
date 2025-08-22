@@ -1,5 +1,7 @@
- "use client";
+"use client";
 
+import { postData } from "@/app/utils/api";
+import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 // Define the shape of the form data
@@ -11,17 +13,9 @@ interface ExpenseFormData {
   paymentType: string;
   attachment: string;
 }
- 
-const postData = (payload: any) => {
-  return new Promise((resolve) => {
-     setTimeout(() => {
-      console.log("Mock API call with payload:", payload);
-       resolve({ status: "success", data: payload.data });
-    }, 1000);
-  });
-};
 
- const mockFetchExpenseData = (id: string) => {
+
+const mockFetchExpenseData = (id: string) => {
   const mockExpenses = {
     "1": {
       id: "1",
@@ -33,7 +27,7 @@ const postData = (payload: any) => {
       remarks: "Fueling up for the trip.",
       fileAttachments: "fuel_receipt.jpg",
     },
-     
+
   };
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -67,14 +61,9 @@ const FormError = ({ message }: { message: string }) => {
 };
 
 const expenseCategories = [
-  "Fuel Charges",
-  "Toll Charges",
-  "Parking Fees",
-  "Driver Allowance",
-  "Food Expenses",
-  "Lodging / Stay Charges",
-  "Vehicle Service on Trip",
-  "Other Miscellaneous",
+  { value: "fuelCharges", label: "Fuel Charges" },
+  { value: "tollCharges", label: "Toll Charges" },
+  { value: "driverAllowance", label: "Driver Allowance" },
 ];
 
 const paymentTypeColors: { [key: string]: string } = {
@@ -102,7 +91,7 @@ export default function CreateTripExpense() {
   const [categorySearchQuery, setCategorySearchQuery] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [toastType, setToastType] = useState<"success" | "error">("success");
-
+  const router = useRouter();
   // Fetch data for editing when the component loads or the ID changes
   useEffect(() => {
     if (editId) {
@@ -169,7 +158,7 @@ export default function CreateTripExpense() {
   }, []);
 
   const handleBackButtonClick = useCallback(() => {
-     setEditId(null);
+    setEditId(null);
   }, []);
 
   const openCategoryOffcanvas = useCallback(() => {
@@ -198,7 +187,7 @@ export default function CreateTripExpense() {
     });
     setErrors({});
     setCategorySearchQuery("");
-    setFormKey(prevKey => prevKey + 1); 
+    setFormKey(prevKey => prevKey + 1);
   }, []);
 
   const handleCreateTripExpense = useCallback(async () => {
@@ -223,11 +212,8 @@ export default function CreateTripExpense() {
       newErrors.paymentType = "Please select a payment type";
       isValid = false;
     }
- 
-    if (!formData.attachment) {
-      newErrors.attachment = "Attachment is required";
-      isValid = false;
-    }
+
+
 
     setErrors(newErrors);
 
@@ -236,8 +222,8 @@ export default function CreateTripExpense() {
       const payload = {
         token: "keepTripExpense",
         data: {
-          id: editId || null, // Include ID if editing
-          tripSheetId: "TRIP-001", // Mocked value
+          id: editId || null,
+          tripSheetId: "TRIP-001",
           expenseCategory: formData.category,
           expenseDate: formData.date,
           amount: formData.amount,
@@ -252,9 +238,8 @@ export default function CreateTripExpense() {
         if (response.status === "success") {
           setToastMessage("Expense saved successfully!");
           setToastType("success");
-          if (!editId) {
-            resetForm();  
-          }
+          router.push("/expense/list");
+          resetForm();
         }
       } catch (error) {
         setToastMessage("Error saving expense. Please try again.");
@@ -267,7 +252,7 @@ export default function CreateTripExpense() {
   }, [formData, editId, resetForm]);
 
   const filteredCategories = expenseCategories.filter((cat) =>
-    cat.toLowerCase().includes(categorySearchQuery.toLowerCase())
+    cat.label.toLowerCase().includes(categorySearchQuery.toLowerCase())
   );
 
   return (
@@ -351,9 +336,8 @@ export default function CreateTripExpense() {
                 {['Cash', 'UPI', 'Net Banking'].map((type) => (
                   <div
                     key={type}
-                    className={`payment-type rounded-full py-1 px-3 font-medium font-semibold cursor-pointer ${
-                      formData.paymentType === type ? paymentTypeColors[type] : 'bg-gray-100'
-                    } border border-gray-300 transition-all`}
+                    className={`payment-type rounded-full py-1 px-3 font-medium font-semibold cursor-pointer ${formData.paymentType === type ? paymentTypeColors[type] : 'bg-gray-100'
+                      } border border-gray-300 transition-all`}
                     onClick={() => handlePaymentTypeClick(type)}
                   >
                     <i className={`ri-checkbox-circle-fill mr-1 ${formData.paymentType !== type ? 'hidden' : ''}`}></i>
@@ -397,12 +381,14 @@ export default function CreateTripExpense() {
       {/* Fixed bottom action bar */}
       <div className="fixed bottom-0 left-0 right-0 z-10 bg-white shadow-lg p-4 flex justify-between items-center">
         {/* Mock toggle for edit mode */}
-        <button
+        <div>
+        {/* <button
           className="text-sm text-gray-500 underline"
-          onClick={() => setEditId(editId ? null : "1")}
+          onClick={() => router.push("/expense/list")}
         >
-          {editId ? 'Switch to Create' : 'Switch to Edit'}
-        </button>
+          Switch to Expense List
+        </button> */}
+        </div>
         <button
           id="createBtn"
           type="button"
@@ -417,7 +403,7 @@ export default function CreateTripExpense() {
       {isCategoryOffcanvasOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300"
+            className="fixed inset-0 bg-black/50 bg-opacity-50 z-30 transition-opacity duration-300"
             onClick={closeCategoryOffcanvas}
           ></div>
           <div
@@ -451,11 +437,11 @@ export default function CreateTripExpense() {
                 {filteredCategories.length > 0 ? (
                   filteredCategories.map((category) => (
                     <div
-                      key={category}
+                      key={category.value}
                       className="p-2 flex items-center justify-between cursor-pointer hover:bg-gray-100 rounded"
-                      onClick={() => handleCategorySelect(category)}
+                      onClick={() => handleCategorySelect(category.value)}
                     >
-                      <span>{category}</span>
+                      <span>{category.label}</span>
                     </div>
                   ))
                 ) : (

@@ -1,71 +1,20 @@
 "use client";
 
+import { postData } from "@/app/utils/api";
+import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
- interface Product {
+// Define a type for the form data
+interface Expense {
   id: string;
-  name: string;
-  category: string;
-  quantity: number;
-  unit: string;
-  price: number;
-  discount: number;
-  imageUrl: string; 
+  tripSheetId: string;
+  expenseCategory: string;
+  amount: number;
+  expenseDate: string;
+  paymentMethod: string;
+  remarks: string;
 }
 
-const productData: Product[] = [
-  {
-    id: "1",
-    name: "Chromebook (11.6\")",
-    category: "Computers & Laptops",
-    quantity: 508,
-    unit: "SET",
-    price: 25000.0,
-    discount: 25.0,
-    imageUrl: "/images/shoppingBag.PNG",
-  },
-  
-  {
-    id: "2",
-    name: "Wireless Mouse",
-    category: "Peripherals",
-    quantity: 120,
-    unit: "PCS",
-    price: 800.0,
-    discount: 10.0,
-    imageUrl: "/images/shoppingBag.PNG",
-  },
-  {
-    id: "3",
-    name: "Mechanical Keyboard",
-    category: "Peripherals",
-    quantity: 30,
-    unit: "PCS",
-    price: 5500.0,
-    discount: 15.0,
-    imageUrl: "/images/shoppingBag.PNG",
-  },
-  {
-    id: "4",
-    name: "USB-C Hub",
-    category: "Accessories",
-    quantity: 0, 
-    unit: "PCS",
-    price: 1200.0,
-    discount: 5.0,
-    imageUrl: "/images/shoppingBag.PNG",
-  },
-  {
-    id: "5",
-    name: "External Hard Drive",
-    category: "Storage",
-    quantity: 75,
-    unit: "PCS",
-    price: 6000.0,
-    discount: 20.0,
-    imageUrl: "/images/shoppingBag.PNG",
-  },
-];
 
 type SortOption =
   | "Default"
@@ -74,63 +23,158 @@ type SortOption =
   | "A to Z"
   | "Z to A";
 
-export default function ProductsAndServices() {
+export default function ExpenseList() {
+  const [expenseList, setExpenseList] = useState<Expense[]>([]);
   const [isSortOffcanvasOpen, setIsSortOffcanvasOpen] = useState(false);
   const [isFilterOffcanvasOpen, setIsFilterOffcanvasOpen] = useState(false);
-  const [isMoreOffcanvasOpen, setIsMoreOffcanvasOpen] = useState(false);
   const [sortText, setSortText] = useState<SortOption>("Default");
   const [hideZeroQuantity, setHideZeroQuantity] = useState(false);
   const [showLowStock, setShowLowStock] = useState(false);
+  const [expenseCategory, setExpenseCategory] = useState("");
+  const [isCategoryOffcanvasOpen, setIsCategoryOffcanvasOpen] = useState(false);
+  const [categorySearchQuery, setCategorySearchQuery] = useState("");
 
   const sortOffcanvasRef = useRef<HTMLDivElement>(null);
   const filterOffcanvasRef = useRef<HTMLDivElement>(null);
   const moreOffcanvasRef = useRef<HTMLDivElement>(null);
+  const filterOverlayRef = useRef<HTMLDivElement>(null);
+  const categoryOverlayRef = useRef<HTMLDivElement>(null);
+  const categoryOffcanvasRef = useRef<HTMLDivElement>(null);
 
+  const expenseCategories = [
+    { value: "fuelCharges", label: "Fuel Charges" },
+    { value: "tollCharges", label: "Toll Charges" },
+    { value: "driverAllowance", label: "Driver Allowance" },
+  ];
+  const router = useRouter();
   const handleSortChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSortText(event.target.value as SortOption);
     setIsSortOffcanvasOpen(false);
   }, []);
 
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (
-      sortOffcanvasRef.current &&
-      !sortOffcanvasRef.current.contains(event.target as Node)
-    ) {
-      setIsSortOffcanvasOpen(false);
+
+
+  useEffect(() => {
+    fetchExpense();
+  }, []);
+
+
+
+
+  const openFilterOffcanvas = useCallback(() => {
+    setIsFilterOffcanvasOpen(true);
+    if (filterOverlayRef.current) {
+      filterOverlayRef.current.classList.remove('hidden');
+      filterOverlayRef.current.classList.add('opacity-100');
     }
-    if (
-      filterOffcanvasRef.current &&
-      !filterOffcanvasRef.current.contains(event.target as Node)
-    ) {
-      setIsFilterOffcanvasOpen(false);
-    }
-    if (
-      moreOffcanvasRef.current &&
-      !moreOffcanvasRef.current.contains(event.target as Node)
-    ) {
-      setIsMoreOffcanvasOpen(false);
+  }, []);
+  const closeFilterOffcanvas = useCallback(() => {
+    setIsFilterOffcanvasOpen(false);
+    if (filterOverlayRef.current) {
+      filterOverlayRef.current.classList.add('hidden');
+      filterOverlayRef.current.classList.remove('opacity-100');
     }
   }, []);
 
+  const filteredCategories = expenseCategories.filter((cat) =>
+    cat.label.toLowerCase().includes(categorySearchQuery.toLowerCase())
+  );
+  const openCategoryOffcanvas = useCallback(() => {
+    if (filterOverlayRef.current) {
+      filterOverlayRef.current.classList.add('hidden');
+    }
+    setIsCategoryOffcanvasOpen(true);
+    if (categoryOverlayRef.current) {
+      categoryOverlayRef.current.classList.remove('hidden');
+      categoryOverlayRef.current.classList.add('opacity-100');
+    }
+  }, []);
+  const closeCategoryOffcanvas = useCallback(() => {
+    setIsCategoryOffcanvasOpen(false);
+    setCategorySearchQuery("");
+    if (categoryOverlayRef.current) {
+      categoryOverlayRef.current.classList.add('hidden');
+      categoryOverlayRef.current.classList.remove('opacity-100');
+    }
+    // Restore filter overlay if filter was open
+    if (isFilterOffcanvasOpen && filterOverlayRef.current) {
+      filterOverlayRef.current.classList.remove('hidden');
+      filterOverlayRef.current.classList.add('opacity-100');
+    }
+  }, [isFilterOffcanvasOpen]);
+
+  const handleCategorySelect = (category: string) => {
+    setExpenseCategory(category);
+    closeCategoryOffcanvas();
+  }
+
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Sort Off-canvas
+      if (
+        sortOffcanvasRef.current &&
+        !sortOffcanvasRef.current.contains(event.target as Node)
+      ) {
+        setIsSortOffcanvasOpen(false);
+      }
+      // Filter Off-canvas
+      if (filterOffcanvasRef.current && !filterOffcanvasRef.current.contains(event.target as Node) && isFilterOffcanvasOpen && event.target === filterOverlayRef.current) {
+        closeFilterOffcanvas();
+      }
+      // Category Off-canvas
+      if (categoryOffcanvasRef.current && !categoryOffcanvasRef.current.contains(event.target as Node) && isCategoryOffcanvasOpen && event.target === categoryOverlayRef.current) {
+        closeCategoryOffcanvas();
+      }
+      // Vehicle Info Off-canvas
+
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [handleClickOutside]);
+  }, [isSortOffcanvasOpen, isFilterOffcanvasOpen, closeFilterOffcanvas, isCategoryOffcanvasOpen, closeCategoryOffcanvas]);
 
-  const sortedAndFilteredProducts = [...productData]
-    .filter((product) => {
-      if (hideZeroQuantity && product.quantity === 0) {
-        return false;
+  const handleFilterSubmit = () => {
+    fetchExpense();
+    closeFilterOffcanvas();
+  }
+
+  const fetchExpense = async () => {
+    try {
+
+
+      const payload = {
+        token: "getTripExpense",
+        data: {
+
+          filters: {
+            expenseCategory: expenseCategory || "",
+
+          },
+        },
+      };
+
+      const response = await postData<any>(payload);
+
+      if (response.status === "success") {
+        const fetchedData = response?.tripExpenses ?? [];
+        if (Array.isArray(fetchedData) && fetchedData.length > 0) {
+          setExpenseList(fetchedData);
+
+        } else {
+          setExpenseList([]);
+        }
+
+      } else {
+        setExpenseList([]);
+
       }
-      
-      if (showLowStock && product.quantity > 50) {
-        return false;
-      }
-      return true;
-    })
- 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <>
@@ -152,7 +196,7 @@ export default function ProductsAndServices() {
           </a>
           <button
             className="text-gray-800"
-            onClick={() => setIsMoreOffcanvasOpen(true)}
+          // onClick={() => setIsMoreOffcanvasOpen(true)}
           >
             <i className="ri-more-fill text-xl"></i>
           </button>
@@ -165,7 +209,7 @@ export default function ProductsAndServices() {
           <div
             className="flex items-center gap-4 cursor-pointer"
             id="sort-btn"
-            onClick={() => setIsSortOffcanvasOpen(true)}
+          // onClick={() => setIsSortOffcanvasOpen(true)}
           >
             <span className="text-gray-500 text-sm font-medium">Sort</span>
             <span
@@ -178,7 +222,7 @@ export default function ProductsAndServices() {
           <button
             id="filter-btn"
             className="text-gray-700 text-sm flex items-center gap-1"
-            onClick={() => setIsFilterOffcanvasOpen(true)}
+            onClick={openFilterOffcanvas}
           >
             <i className="ri-filter-2-line"></i>
             <span className="text-sm font-semibold">Filter</span>
@@ -189,15 +233,15 @@ export default function ProductsAndServices() {
         <div className="mt-2 mx-4 flex flex-col">
           {/* Product List */}
           <div className="product-list overflow-y-auto space-y-2">
-            {sortedAndFilteredProducts.length > 0 ? (
-              sortedAndFilteredProducts.map((product) => (
+            {expenseList.length > 0 ? (
+              expenseList.map((expense) => (
                 <div
-                  key={product.id}
+                  key={expense.id}
                   className="relative bg-white py-5 px-3 rounded-lg"
                 >
                   <div className="absolute top-0 right-0 bg-green-50 rounded-tr-lg rounded-bl-lg px-2 py-0.5">
                     <div className="text-xs text-green-800 font-semibold">
-                      Qty: {product.quantity.toFixed(2)} {product.unit}
+                      Trip Sheet: {expense.tripSheetId}
                     </div>
                   </div>
 
@@ -205,27 +249,27 @@ export default function ProductsAndServices() {
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 border border-gray-200 flex items-center justify-center rounded-md">
                         <img
-                          src={product.imageUrl}
-                          alt={product.name}
+                          src={expense.expenseCategory}
+                          alt={expense.expenseCategory}
                           className="w-6 h-6"
                         />
                       </div>
                       <div>
                         <div className="font-medium text-gray-800 font-semibold">
-                          {product.name}
+                          {expense.expenseCategory}
                         </div>
                         <div className="text-sm text-gray-500 font-semibold">
-                          {product.category}
+                          {expense.expenseDate}
                         </div>
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end mt-1">
                       <div className="font-semibold">
-                        ₹{product.price.toFixed(2)}
+                        ₹{expense.amount}
                       </div>
                       <div className="text-xs text-green-600">
-                        ({product.discount.toFixed(1)}%)
+                        ({expense.paymentMethod})
                       </div>
                     </div>
                   </div>
@@ -233,25 +277,24 @@ export default function ProductsAndServices() {
               ))
             ) : (
               <div className="text-center text-gray-500 mt-8">
-                No products found matching your criteria.
+                No Expense found matching your criteria.
               </div>
             )}
           </div>
         
           <a
-            
+            onClick={() => router.push("/expense/new")}
             className="m-2 bg-green-600 transition text-white font-semibold rounded-full shadow w-auto px-4 py-2 ml-auto flex items-center gap-1"
           >
-            <i className="ri-add-fill text-xl"></i>NEW PRODUCT
+            <i className="ri-add-fill text-xl"></i>NEW EXPENSE
           </a>
         </div>
 
         
         <div
           id="sort-offcanvas"
-          className={`fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-30 ${
-            isSortOffcanvasOpen ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-50 flex items-end justify-center bg-black/50 bg-opacity-30 ${isSortOffcanvasOpen ? "" : "hidden"
+            }`}
         >
           <div
             ref={sortOffcanvasRef}
@@ -327,108 +370,183 @@ export default function ProductsAndServices() {
           </div>
         </div>
 
-       
         <div
-          id="more-offcanvas"
-          className={`fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-30 ${
-            isMoreOffcanvasOpen ? "" : "hidden"
-          }`}
+          ref={categoryOverlayRef}
+          className={`fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-50 z-50 ${isCategoryOffcanvasOpen ? 'opacity-100' : 'opacity-0 hidden'} transition-opacity duration-300`}
+          onClick={closeCategoryOffcanvas}
+        ></div>
+
+
+        
+        <div ref={categoryOffcanvasRef}
+          className={`fixed bottom-0 left-0 right-0 bg-white custom-rounded-t z-60 shadow-lg flex flex-col transform ${isCategoryOffcanvasOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-200`}
         >
-          <div
-            ref={moreOffcanvasRef}
-            className="w-full max-w-md bg-white custom-rounded-t shadow-sm pb-4 animate-slideUp"
-          >
-            <div className="flex justify-center mb-2 mt-2">
-              <div className="w-12 h-1.5 bg-gray-300 rounded-full"></div>
+          <div className="py-2 px-5 border-b-2 border-gray-200">
+            <div className="flex justify-center mb-3">
+              <div className="w-16 h-1 bg-gray-400 rounded-full mt-2"></div>
             </div>
-            <div className="flex flex-col m-5 bg-white border border-gray-200 rounded-lg">
-              <button className="flex items-center gap-3 px-4 py-2 text-gray-800 font-medium border-b text-left w-full ">
-                <i className="ri-add-box-line text-xl"></i>
-                Add Product
+            <div className="flex justify-between items-center">
+              <div className="text-xl font-bold text-gray-800">Select Category</div>
+              <button id="closecategoryBtn" className="text-gray-500" onClick={closeCategoryOffcanvas}>
+                <i className="ri-close-line text-2xl"></i>
               </button>
-              <button className="flex items-center gap-3 px-4 py-2 text-gray-800 font-medium border-b text-left w-full ">
-                <i className="ri-file-excel-2-line text-xl"></i>
-                Download Low Stock Excel
-              </button>
-              <button className="flex items-center gap-3 px-4 py-2 text-gray-800 font-medium text-left w-full ">
-                <i className="ri-file-pdf-2-line text-xl"></i>
-                Download Low Stock PDF
-              </button>
+            </div>
+          </div>
+          <div className="flex-1 p-4 max-h-[460px] min-h-[460px] flex flex-col">
+            <div className="mb-2 relative">
+              <i className="ri-search-line absolute inset-y-0 left-3 flex items-center text-gray-400 text-lg pointer-events-none"></i>
+              <input
+                type="text"
+                id="unitSearchInput"
+                className="form-control w-full search-input pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-green-500 focus:border-green-500"
+                placeholder="Search Expense Category"
+                value={categorySearchQuery}
+                onChange={(e) => setCategorySearchQuery(e.target.value)}
+              />
+            </div>
+            <div className="overflow-y-auto flex-1 custom-scroll">
+              {filteredCategories.length > 0 ? (
+                filteredCategories.map((category) => (
+                  <div
+                    key={category.value}
+                    className="p-2 flex items-center justify-between cursor-pointer hover:bg-gray-100 rounded"
+                    onClick={() => handleCategorySelect(category.value)}
+                  >
+                    <span>{category.label}</span>
+                  </div>
+                ))
+              ) : (
+                <div className="p-2 text-gray-500">No categories found.</div>
+              )}
+            </div>
+            <div className="px-2 mt-2">
+              <button className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold text-center transition hover:bg-green-700">Add Category</button>
             </div>
           </div>
         </div>
 
-         <div
-          id="Filter-offcanvas"
-          className={`fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-30 ${
-            isFilterOffcanvasOpen ? "" : "hidden"
-          }`}
+
+
+        <div
+          ref={filterOverlayRef}
+          className={`fixed inset-0 z-40 bg-[rgba(0,0,0,0.5)] ${isFilterOffcanvasOpen ? 'opacity-100' : 'opacity-0 hidden'} transition-opacity duration-300`}
+          onClick={closeFilterOffcanvas} // Click on overlay to close filter
+        ></div>
+
+
+        <div
+          ref={filterOffcanvasRef}
+          className={`fixed bottom-0 left-0 right-0 w-full max-w-md bg-white rounded-t-2xl shadow-lg z-50 transform ${isFilterOffcanvasOpen ? 'translate-y-0' : 'translate-y-full hidden'}`}
         >
-          <div
-            ref={filterOffcanvasRef}
-            className="w-full max-w-md bg-white rounded-t-2xl shadow-lg animate-slideUp"
-          >
-            <div className="flex items-center justify-between px-6 py-4 border-b">
-              <h3 className="text-lg font-semibold text-gray-800">
-                Filter Products by
-              </h3>
+          <div className="py-2 px-5 border-b-2 border-gray-200">
+            <div className="flex justify-center mb-3">
+              <div className="w-16 h-1 bg-gray-400 rounded-full mt-2"></div>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className="text-xl font-bold text-gray-800">Filter by</div>
               <button
-                id="close-Filter"
+
                 className="text-gray-500 text-2xl focus:outline-none"
-                onClick={() => setIsFilterOffcanvasOpen(false)}
+                onClick={closeFilterOffcanvas}
               >
                 <i className="ri-close-line"></i>
               </button>
             </div>
-
-            <div className="flex flex-col px-6 py-4">
-              <span className="font-semibold text-gray-600 mb-3">
-                Quantity
-              </span>
-
-              <div className="border border-gray-200 rounded-xl p-4 bg-gray-50 space-y-4 mb-2">
-                <label className="flex items-center pt-1 space-x-3">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-4 w-4 text-blue-600 accent-green-600"
-                    checked={hideZeroQuantity}
-                    onChange={() => setHideZeroQuantity(!hideZeroQuantity)}
-                  />
-                  <span className="text-gray-800 font-medium">
-                    Hide 0 Quantity Products
-                  </span>
-                </label>
-
-                <label className="flex items-center pt-1 space-x-3">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-4 w-4 text-blue-600 accent-green-600"
-                    checked={showLowStock}
-                    onChange={() => setShowLowStock(!showLowStock)}
-                  />
-                  <span className="text-gray-800 font-medium">
-                    Low Stock Products
-                  </span>
-                </label>
+          </div>
+          <div className="flex flex-col px-5 py-6">
+            {/* Label */}
+            <div>
+              <label className="block text-md font-medium text-gray-700 mb-2">Expense Category</label>
+              <div className="relative cursor-pointer" onClick={openCategoryOffcanvas}>
+                <input
+                  type="text"
+                  name="category"
+                  className={`form-control pr-10 w-full expense `}
+                  placeholder="Select Category"
+                  value={expenseCategory}
+                  readOnly
+                />
+                <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                  <i className="ri-arrow-down-s-fill text-gray-800 text-lg"></i>
+                </div>
               </div>
             </div>
-
-            <div className="flex justify-between px-6 py-3 border-t text-lg">
-              <button
-                className="text-gray-800 font-semibold"
-                onClick={() => setIsFilterOffcanvasOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg"
-                onClick={() => setIsFilterOffcanvasOpen(false)} 
-              >
-                Submit
-              </button>
-            </div>
+          </div>
+          {/* Buttons */}
+          <div className="flex justify-between px-6 py-3 border-t-[1px] border-gray-200 text-lg ">
+            <button className="text-gray-800 font-semibold" onClick={() => {
+              closeFilterOffcanvas();
+              setExpenseCategory("");
+            }}>Cancel</button>
+            <button className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg" onClick={()=>{handleFilterSubmit(); setExpenseCategory("")}}>Submit</button>
           </div>
         </div>
+
+        {/* Filter Off-canvas
+        {isFilterOffcanvasOpen && (
+          <div
+
+            className={`fixed bottom-0 left-0 right-0 inset-0 z-50 flex items-end justify-center  bg-opacity-30 `}
+
+          >
+            <div
+              ref={filterOffcanvasRef}
+              className="w-full max-w-md bg-white rounded-t-2xl shadow-lg animate-slideUp"
+            >
+              <div className="flex items-center justify-between px-6 py-4 border-b">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  Filter Expense by
+                </h3>
+                <button
+                  id="close-Filter"
+                  className="text-gray-500 text-2xl focus:outline-none"
+                  onClick={() => setIsFilterOffcanvasOpen(false)}
+                >
+                  <i className="ri-close-line"></i>
+                </button>
+              </div>
+
+              <div className="flex flex-col px-6 py-4">
+                <span className="font-semibold text-gray-600 mb-3">
+                  Expense Category
+                </span>
+
+                <div className="relative cursor-pointer" onClick={openCategoryOffcanvas}>
+                  <input
+                    type="text"
+                    name="category"
+                    className={`form-control pr-10 w-full expense `}
+                    placeholder="Select Category"
+                    value={expenseCategory}
+                    readOnly
+                  />
+                  <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                    <i className="ri-arrow-down-s-fill text-gray-800 text-lg"></i>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="flex justify-between px-6 py-3 border-t text-lg">
+                <button
+                  className="text-gray-800 font-semibold"
+                  onClick={() => {
+                    setIsFilterOffcanvasOpen(false);
+                    setExpenseCategory("");
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-green-600 text-white font-semibold px-6 py-2 rounded-lg"
+                  onClick={handleFilterSubmit} // Apply filter logic here
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        )} */}
       </main>
 
       
