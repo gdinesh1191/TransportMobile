@@ -153,7 +153,7 @@ export default function Cashbook() {
             </table>
           </div>
 
-          {/* Totals Footer */}
+          
           <div className="sticky bottom-0 bg-gray-100 border-t font-semibold">
             <table className="min-w-full text-sm">
               <tfoot>
@@ -165,7 +165,7 @@ export default function Cashbook() {
                   <td className="px-4 py-3 text-right text-red-700">
                     ₹{totalDebit.toFixed(2)}
                   </td>
-                </tr>
+                </tr> 
               </tfoot>
             </table>
           </div>
