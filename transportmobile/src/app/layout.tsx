@@ -34,7 +34,7 @@ export default function RootLayout({
     { label: "Vehicle", icon: "ri-truck-line", path: "/vehicle/list" },
     { label: "Expense", icon: "ri-wallet-3-line", path: "/expense/new" },
     { label: "Cashbook", icon: "ri-cash-line", path: "/cashbook" },
-    { label: "Trip", icon: "ri-road-map-line", path: "/" },
+    // { label: "Trip", icon: "ri-road-map-line", path: "/" },
   ];
 
   // This effect sets the page title based on the current URL
